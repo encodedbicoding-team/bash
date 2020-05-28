@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Layout from '../../utils/Layout';
 import {
   decrement,
   increment,
@@ -15,7 +16,8 @@ export function Counter() {
   const [incrementAmount, setIncrementAmount] = useState('2');
 
   return (
-    <div>
+    <Layout>
+      <div>
       <div className={styles.row}>
         <button
           className={styles.button}
@@ -56,5 +58,6 @@ export function Counter() {
         </button>
       </div>
     </div>
+    </Layout>
   );
 }
