@@ -1,0 +1,39 @@
+.layout{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #F1F2F3 0% 0% no-repeat padding-box;
+}
+.layout_container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 15% 35% 25% 25%;
+  grid-template-rows: 8% 86% auto;
+  grid-template-areas:
+  "nv nv nv nv"
+  "sd mb mb mb"
+  "ft ft ft ft";
+}
+.navigation {
+  grid-area: nv;
+  background: #F1F2F3 0% 0% no-repeat padding-box;
+}
+.main_body{
+  grid-area: mb;
+  overflow: scroll;
+  border-top-left-radius: 16px;
+  padding: 10px;
+  background: #F8F8F9 0% 0% no-repeat padding-box;
+}
+.sidebar {
+  grid-area: sd;
+  background: #F1F2F3 0% 0% no-repeat padding-box;
+}
+.footer{
+  grid-area: ft;
+  background: #F1F2F3 0% 0% no-repeat padding-box;
+}

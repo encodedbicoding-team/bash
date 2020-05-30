@@ -1,0 +1,20 @@
+.logo_container{
+  border: 1px solid red;
+  width: 120px
+}
+.logo_vertical{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px
+}
+.logo_horizontal{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}

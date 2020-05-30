@@ -1,19 +1,19 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Layout from '../../utils/Layout';
-import DashboardComponent from '../../components/Dashboard';
+import UserComponent from '../../components/User';
 
-function DashboardPage() {
+function UserPage() {
   return (
     <div>
       <Helmet>
-        <title>Dashboard - Bash</title>
+        <title>Users - Bash</title>
       </Helmet>
       <Layout>
-        <DashboardComponent />
+        <UserComponent/>
       </Layout>
     </div>
   )
 }
 
-export default DashboardPage;
+export default UserPage;
