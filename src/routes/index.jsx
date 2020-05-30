@@ -3,17 +3,15 @@ import { Switch, Route} from 'react-router-dom';
 import DashboardPage from '../pages/dashboard';
 import LoginPage from '../pages/login';
 import UserPage from '../pages/users';
-import { UserTransDetails } from '../components/Dashboard/subComponents';
+import { PageNavigation } from '../utils/pageNavigation';
 
 export default () => (  
   <Switch>
+    <Route exact path="/">
+      <LoginPage/>
+    </Route>
     <Route exact path="/bc">
-      <UserTransDetails 
-        amt="5,000"
-        trans_date="21/jan/2020"
-        first_name="john"
-        last_name="doe"
-      />
+      <PageNavigation/>
     </Route>
     <Route exact path="/auth">
       <LoginPage/>
