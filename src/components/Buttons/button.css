@@ -1,0 +1,48 @@
+.button_container{
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+  width: 72px;
+  height: auto;
+  font-size: 13px;
+  background-color: #D4145A;
+  box-shadow: 0px 20px 40px #B110304D;
+  background: #D4145A 0% 0% no-repeat padding-box;
+  border: 1px solid #D41359;
+  border-radius: 200px;
+}
+.button_container:hover{
+  background-color: rgba(212, 20, 90, 0.781);
+  border: 1px solid rgba(212, 19, 90, 0.767);
+}
+.button_item > .button{
+  color: #fff !important;
+  margin: 5px;
+  font-size: 13.2px;
+}
+.button_item > .add{
+  color: #fff;
+  margin-left: 5px;
+}
+.button_item{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 3px 5px 3px 5px;
+}
+.button{
+  font-size: 10px;
+  background-color: #fff;
+  border: none;
+  margin: 0;
+  padding-left: 0;
+  outline: none;
+  cursor: pointer;
+  text-transform: capitalize;
+  background-color: inherit;
+}

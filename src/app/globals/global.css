@@ -1,0 +1,32 @@
+.br{
+  border: 1px solid red
+}
+.capitalize{
+  text-transform: capitalize;
+}
+.flex {
+  display: flex;
+}
+.flex-col{
+  flex-direction: column;
+}
+.font-primary{
+  color: #888D96
+}
+.font-small {
+  font-size: small;
+}
+.font-medium{
+  font-size: medium;
+}
+.flex-g-1 {
+  flex-grow: 1;
+}
+.page_title{
+  font-size: 23px;
+  color: #888D96;
+  margin: 15px 0 15px 0;
+}
+.link{
+  text-decoration: none;
+}
