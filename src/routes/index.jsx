@@ -7,6 +7,9 @@ import { PageNavigation } from '../utils/pageNavigation';
 
 export default () => (  
   <Switch>
+    <Route exact path="/">
+      <LoginPage/>
+    </Route>
     <Route exact path="/bc">
       <PageNavigation/>
     </Route>
