@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  outline: none;
 }
 .page_navigation_contents {
   flex-grow: 1;

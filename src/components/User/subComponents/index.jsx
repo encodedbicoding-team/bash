@@ -95,13 +95,94 @@ const UserDetailsContent = (
         <p>{status}</p>
       </div>
       <div className="usmd_detail_item">
-        <p>eye</p>
+        <i class="lni lni-eye"></i>
       </div>
     </Link>
   </div>
 )
 
 const dummy_user_details = [
+  {
+    id: 1,
+    img_url: '',
+    phone: '23234334',
+    email: 'tester@gmail.com',
+    username: 'limbo',
+    status: 'verified',
+    fullname: 'john doe'
+  },
+  {
+    id: 2,
+    img_url: '',
+    phone: '0023234334',
+    email: 'tester2@gmail.com',
+    username: 'limbo',
+    status: 'verified',
+    fullname: 'janet doe'
+  },
+  {
+    id: 3,
+    img_url: '',
+    phone: '23203234334',
+    email: 'testing@gmail.com',
+    username: 'limbo',
+    status: 'verified',
+    fullname: 'jeffery doe'
+  },
+  {
+    id: 1,
+    img_url: '',
+    phone: '23234334',
+    email: 'tester@gmail.com',
+    username: 'limbo',
+    status: 'verified',
+    fullname: 'john doe'
+  },
+  {
+    id: 2,
+    img_url: '',
+    phone: '0023234334',
+    email: 'tester2@gmail.com',
+    username: 'limbo',
+    status: 'verified',
+    fullname: 'janet doe'
+  },
+  {
+    id: 3,
+    img_url: '',
+    phone: '23203234334',
+    email: 'testing@gmail.com',
+    username: 'limbo',
+    status: 'verified',
+    fullname: 'jeffery doe'
+  },
+  {
+    id: 1,
+    img_url: '',
+    phone: '23234334',
+    email: 'tester@gmail.com',
+    username: 'limbo',
+    status: 'verified',
+    fullname: 'john doe'
+  },
+  {
+    id: 2,
+    img_url: '',
+    phone: '0023234334',
+    email: 'tester2@gmail.com',
+    username: 'limbo',
+    status: 'verified',
+    fullname: 'janet doe'
+  },
+  {
+    id: 3,
+    img_url: '',
+    phone: '23203234334',
+    email: 'testing@gmail.com',
+    username: 'limbo',
+    status: 'verified',
+    fullname: 'jeffery doe'
+  },
   {
     id: 1,
     img_url: '',

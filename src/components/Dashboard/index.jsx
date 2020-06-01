@@ -46,7 +46,7 @@ class DashboardComponent extends Component {
                       <Link className="link view-all-link">
                         <div className="capitalize dash-view-all">
                           <span>view all</span>
-                          <span>></span>
+                          <i class="lni lni-chevron-right"></i>
                         </div>
                       </Link>
                     </div>
@@ -78,7 +78,7 @@ class DashboardComponent extends Component {
                     </div>
                   </div>
                 </div>
-                <div>
+                <div className="">
                   <div>
                     <LargeSubComponentWithGraph 
                       image_name="lni lni-users"

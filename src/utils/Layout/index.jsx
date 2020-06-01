@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import sidenavedata from '../sidenavdata';
 import SideNavComponent from '../../components/SideNav/SideComponent'; 
+import TopNav from '../../components/TopNav';
 import './layout.css';
 
 class Layout extends Component {
@@ -9,7 +10,7 @@ class Layout extends Component {
       <div className="layout">
         <section className="layout_container">
           <section className="navigation">
-          <div>nv</div>
+            <TopNav/>
           </section>
           <section className="sidebar">
             <div className="side_nav_items">

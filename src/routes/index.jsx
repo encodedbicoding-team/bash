@@ -3,6 +3,7 @@ import { Switch, Route} from 'react-router-dom';
 import DashboardPage from '../pages/dashboard';
 import LoginPage from '../pages/login';
 import UserPage from '../pages/users';
+import UserDetailsPage from '../pages/userDetails';
 import { PageNavigation, DetailsGraph } from '../utils/pageNavigation';
 import { UserMainDetails, UserDetailsContent } from '../components/User/subComponents';
 
@@ -30,6 +31,9 @@ export default () => (
     </Route>
     <Route exact path="/users">
       <UserPage/>
+    </Route>
+    <Route exact path="/users/d/:id">
+      <UserDetailsPage/>
     </Route>
   </Switch>
 )

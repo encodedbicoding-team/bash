@@ -19,9 +19,7 @@ export default ({image_class, text, url, active = false, image_color}) => {
                 <p>{text}</p>
             </div>
             <div>
-              {
-                active ? <div className="dot"></div> : ''
-              }
+            <div className={active ? "dot" : ""}></div>
             </div>
         </div>
       </div>

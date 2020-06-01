@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { PageNavigation } from '../../utils/pageNavigation';
+import { UserMainDetails } from './subComponents';
 import './user.css'
 
 class UserComponent extends Component {
@@ -34,6 +35,9 @@ class UserComponent extends Component {
           </div>
           <div>
             graph place
+          </div>
+          <div className="user_details_section">
+            <UserMainDetails/>
           </div>
         </div>
       </div>

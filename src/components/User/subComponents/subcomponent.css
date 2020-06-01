@@ -50,10 +50,13 @@
   flex-direction: column;
   justify-content: center;
 }
+.usmd_detail_item i {
+  color: #D4145A
+}
 .user_details_content_container  {
   background: #F8F8F9 0% 0% no-repeat padding-box;
   border: 1px solid #F8F8F9;
   border-radius: 2px;
   opacity: 1;
-  margin: 10px 0 10px 0;
+  margin: 0 0 3px 0;
 }
