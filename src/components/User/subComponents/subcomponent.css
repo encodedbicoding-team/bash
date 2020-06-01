@@ -16,10 +16,12 @@
   width: 100%;
   height: auto;
   background-color: inherit;
-  height: 500px;
-  overflow: scroll;
   margin: 0;
   padding: 0;
+}
+.user_details_contents_main_container {
+  height: 450px;
+  overflow: scroll;
 }
 .d-none {
   opacity: 0;

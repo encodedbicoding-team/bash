@@ -25,7 +25,7 @@ class DashboardComponent extends Component {
                     <p className="font-primary font-medium dash_rt">Recent Transactions</p>
                     <div>
                       <Graph 
-                        w={670}
+                        w={679}
                         graph_data={dummy_graph_data}
                       />
                     </div>
@@ -85,7 +85,7 @@ class DashboardComponent extends Component {
                       sub_text="total users"
                       sub_data="12.5M"
                       url="users"
-                      w={347}
+                      w={353}
                       graph_data={dummy_graph_data}
                     />
                   </div>
