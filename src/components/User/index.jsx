@@ -32,6 +32,9 @@ class UserComponent extends Component {
           <div>
             dssds
           </div>
+          <div>
+            graph place
+          </div>
         </div>
       </div>
     )

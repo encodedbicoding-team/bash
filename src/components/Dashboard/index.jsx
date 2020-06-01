@@ -203,7 +203,7 @@ const dummy_user_transaction_data = [
     img_src: '',
     first_name: 'francisca',
     last_name: 'nzena',
-    amt: '5,000',
+    amt: '6,000',
     trans_date: '21/jan/2020'
   },
   {

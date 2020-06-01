@@ -4,6 +4,9 @@
 .capitalize{
   text-transform: capitalize;
 }
+.upper {
+  text-transform: uppercase;
+}
 .flex {
   display: flex;
 }
@@ -29,4 +32,10 @@
 }
 .link{
   text-decoration: none;
+}
+.td-none{
+  text-decoration: none;
+}
+.flex-row{
+  flex-direction: row;
 }
