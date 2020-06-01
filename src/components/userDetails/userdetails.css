@@ -1,0 +1,148 @@
+.user_details_items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+.user_details_items_back {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.items_back_link:hover,
+.user_details_items_blockuser:hover{
+  background: #FBE7EE 0% 0% no-repeat padding-box;
+  box-shadow: 0px 20px 40px #B1103000;
+  border: 1px solid #FBE7EE;
+}
+.items_back_link,
+.user_details_items_blockuser {
+  padding: 3px;
+  font-size: 13px;
+  color: #D4145A;
+  text-decoration: none;
+  width: 5.6%;
+  border-radius: 100px;
+  padding: 6px;
+}
+.user_details_items_blockuser {
+  width: 8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+}
+.user_details_comp1 {
+  margin-right: 10px;
+}
+.user_details_component_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; 
+  padding: 13px;
+  font-size: 13px;
+  color: #D4145A;
+}
+.user_details_component_body {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-rows: auto;
+  margin-top: 15px;
+}
+.user_details_profile_container {
+  background: #F1F2F3 0% 0% no-repeat padding-box;
+  border: 1px solid #EBECED;
+  border-radius: 14px;
+  opacity: 1;
+}
+.user_details_profile_head {
+  background-color: #fff;
+  padding: 18px 18px 3px 18px;
+  margin-top: 60px;
+  border-bottom: .7px solid #EBECED;
+}
+.user_details_profile_body {
+  background-color: #fff;
+  padding: 18px 18px 3px 18px;
+  border-radius: 0 0 14px 14px;
+}
+.u_profile_h {
+  display: flex;
+  flex-direction: row;
+  height: 59px;
+}
+.u_profile_image_c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  overflow: hidden;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  position: relative;
+  top: -45px;
+}
+#u_profile_name {
+  font-weight: 900;
+}
+.u_profile_username {
+  color: #505560;
+}
+.u_profile_data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 10px 0;
+}
+.u_profile_data p,
+.u_profile_games_p {
+  color: #505560;
+  font-size: 10px;
+}
+#status-verified {
+  color: #3FC89C;
+}
+#status-not-verified {
+  color: #D4145A;
+}
+.u_profile_games_details_cont {
+  margin-top: 14px;
+}
+.u_profile_games_details{
+  border-radius: 14px;
+  background: #fff 0% 0% no-repeat padding-box;
+  border: 1px solid #EBECED;
+  padding: 0 0 5px 0;
+}
+.u_profile_gd {
+  padding: 15px 15px 8px 15px;
+  border-bottom: 1px solid #EBECED;
+}
+.u_profile_gdw {
+  padding: 15px 15px 8px 15px;
+}
+.u_profile_graph {
+  padding-top: 14px;
+}
+.u_profile_balance {
+  padding: 30px 24px 30px 24px;
+  margin: 12px 0 12px 0;
+  border-radius: 14px;
+  background: #fff 0% 0% no-repeat padding-box;
+  border: 1px solid #EBECED;
+}
+.u_profile_lifelines {
+  margin: 25px 0 0 0;
+}
+.u_profile_lifelines #lifelines{
+  font-size: 12px;
+  padding: 0 0 5px 4px;
+  color: #888D96;
+}

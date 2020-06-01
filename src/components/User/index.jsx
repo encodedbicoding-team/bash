@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { PageNavigation } from '../../utils/pageNavigation';
+import { UserMainDetails } from './subComponents';
+import { DetailsInfo } from '../../utils/utils';
 import './user.css'
 
 class UserComponent extends Component {
@@ -29,8 +31,28 @@ class UserComponent extends Component {
               date_func={(f) => console.log(f)}
             />
           </div>
+          <div className="flex flex-row u_d_place">
+              <div>
+                <DetailsInfo 
+                  title="total"
+                  figure="59,364"
+                  w="120px"
+                />
+              </div>
+              <div>
+                <DetailsInfo 
+                  title="games played"
+                  figure="1,939,364"
+                  w="120px"
+                  border_right={false}
+                />
+              </div>
+          </div>
           <div>
-            dssds
+            graph place
+          </div>
+          <div className="user_details_section">
+            <UserMainDetails/>
           </div>
         </div>
       </div>

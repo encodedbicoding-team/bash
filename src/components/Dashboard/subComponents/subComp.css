@@ -15,14 +15,18 @@
   height: 350px;
   z-index: 300;
 }
-.recharts-surface{
+.recharts-surface {
   cursor: pointer;
+  padding: 0;
+  margin: -5px;
 }
 .large_sublink_sub_content {
   flex-grow: 1;
 }
 .large_sublink_container{
   padding: 0px !important;
+  position: relative;
+  top: -19px !important;
 }
 .sublink_container,
 .large_sublink_container {

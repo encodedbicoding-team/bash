@@ -6,6 +6,8 @@ import { SubComponents,
         UserTransDetails
   } from './subComponents';
 
+import { DetailsInfo } from '../../utils/utils';
+
 import './dashboard.css';
 
 class DashboardComponent extends Component {
@@ -16,7 +18,36 @@ class DashboardComponent extends Component {
           <div className="page_title">
             <p>Dashboard</p>
           </div>
-          <div>sds</div>
+          <div className="flex flex-row dash_details_place">
+              <div>
+                <DetailsInfo 
+                  title="visitors"
+                  figure="59,364"
+                  w="120px"
+                />
+              </div>
+              <div>
+                <DetailsInfo 
+                  title="games played"
+                  figure="1,939,364"
+                  w="140px"
+                />
+              </div>
+              <div>
+                <DetailsInfo 
+                  title="amount deposited"
+                  figure="₦7,259,364"
+                  w="160px"
+                />
+              </div>
+              <div>
+                <DetailsInfo 
+                  title="amount won"
+                  figure="₦119,234"
+                  border_right={false}
+                />
+              </div>
+          </div>
           <div className="dashboard_data_grid">
             <div className="">
               <div>
@@ -25,7 +56,7 @@ class DashboardComponent extends Component {
                     <p className="font-primary font-medium dash_rt">Recent Transactions</p>
                     <div>
                       <Graph 
-                        w={670}
+                        w={679}
                         graph_data={dummy_graph_data}
                       />
                     </div>
@@ -46,7 +77,7 @@ class DashboardComponent extends Component {
                       <Link className="link view-all-link">
                         <div className="capitalize dash-view-all">
                           <span>view all</span>
-                          <span>></span>
+                          <i class="lni lni-chevron-right"></i>
                         </div>
                       </Link>
                     </div>
@@ -78,14 +109,14 @@ class DashboardComponent extends Component {
                     </div>
                   </div>
                 </div>
-                <div>
+                <div className="">
                   <div>
                     <LargeSubComponentWithGraph 
                       image_name="lni lni-users"
                       sub_text="total users"
                       sub_data="12.5M"
                       url="users"
-                      w={347}
+                      w={353}
                       graph_data={dummy_graph_data}
                     />
                   </div>
@@ -203,7 +234,7 @@ const dummy_user_transaction_data = [
     img_src: '',
     first_name: 'francisca',
     last_name: 'nzena',
-    amt: '5,000',
+    amt: '6,000',
     trans_date: '21/jan/2020'
   },
   {

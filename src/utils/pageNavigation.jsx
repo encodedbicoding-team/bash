@@ -14,7 +14,7 @@ const PageNavigation = ({page_details, current_search, date_func}) => {
         url: '/users'
       },
        {
-        text: 'let',
+        text: 'active',
         url: '/users'
       }
     ]
@@ -94,6 +94,12 @@ const PageNavigation = ({page_details, current_search, date_func}) => {
   )
 }
 
+const DetailsGraph = () => (
+  <div>
+    sd
+  </div>
+)
 export  {
-  PageNavigation
+  PageNavigation,
+  DetailsGraph,
 }
