@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router';
 import { Link } from 'react-router-dom';
 import { Graph } from '../Dashboard/subComponents';
+import  { DetailsInfo } from '../../utils/utils';
 import './userdetails.css';
 
 
@@ -89,7 +90,56 @@ class UserDetailsComponent extends Component {
               </div>
             </div>
             <div className="br">
-              <div>balance</div>
+              <div className="u_profile_graph">
+                <Graph w={703} graph_data={dummy_graph_data}/>
+              </div>
+              <div className="u_profile_balance">
+                <div className="flex flex-row">
+                  <div>
+                    <DetailsInfo
+                      title="wallet balance"
+                      figure="₦259,364"
+                      color="#26C0C7"
+                      font_size="30px"
+                      w="160px"
+                    />
+                  </div>
+                  <div>
+                  <div>
+                    <DetailsInfo
+                      title="coin balance"
+                      figure="72,593BC"
+                      color="#5AA9FA"
+                      font_size="30px"
+                      w="160px"
+                      border_right={false}
+                    />
+                  </div>
+                  </div>
+                </div>
+                <div className="u_profile_lifelines">
+                  <p id="lifelines">Lifelines</p>
+                  <div className="flex flex-row">
+                    <div>
+                      <DetailsInfo
+                        title="50/50"
+                        figure="442"
+                        font_size="15px"
+                        w="70px"
+                      />
+                    </div> 
+                    <div>
+                      <DetailsInfo
+                        title="add-time"
+                        figure="72"
+                        font_size="15px"
+                        w="70px"
+                        border_right={false}
+                      />
+                    </div> 
+                  </div>
+                </div>
+              </div>
               <div>trans</div>
             </div>
         </div>

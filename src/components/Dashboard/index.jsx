@@ -6,6 +6,8 @@ import { SubComponents,
         UserTransDetails
   } from './subComponents';
 
+import { DetailsInfo } from '../../utils/utils';
+
 import './dashboard.css';
 
 class DashboardComponent extends Component {
@@ -16,7 +18,36 @@ class DashboardComponent extends Component {
           <div className="page_title">
             <p>Dashboard</p>
           </div>
-          <div>sds</div>
+          <div className="flex flex-row dash_details_place">
+              <div>
+                <DetailsInfo 
+                  title="visitors"
+                  figure="59,364"
+                  w="120px"
+                />
+              </div>
+              <div>
+                <DetailsInfo 
+                  title="games played"
+                  figure="1,939,364"
+                  w="140px"
+                />
+              </div>
+              <div>
+                <DetailsInfo 
+                  title="amount deposited"
+                  figure="₦7,259,364"
+                  w="160px"
+                />
+              </div>
+              <div>
+                <DetailsInfo 
+                  title="amount won"
+                  figure="₦119,234"
+                  border_right={false}
+                />
+              </div>
+          </div>
           <div className="dashboard_data_grid">
             <div className="">
               <div>

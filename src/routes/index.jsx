@@ -4,7 +4,7 @@ import DashboardPage from '../pages/dashboard';
 import LoginPage from '../pages/login';
 import UserPage from '../pages/users';
 import UserDetailsPage from '../pages/userDetails';
-import { PageNavigation, DetailsGraph } from '../utils/pageNavigation';
+import { DetailsInfo } from '../utils/utils';
 import { UserMainDetails, UserDetailsContent } from '../components/User/subComponents';
 
 export default () => (  
@@ -13,14 +13,9 @@ export default () => (
       <LoginPage/>
     </Route>
     <Route exact path="/bc">
-      <UserMainDetails/>
-      <UserDetailsContent
-        id={1}
-        phone="09039430430943"
-        email="test@email.com"
-        username="tester"
-        status="verified"
-        fullname="John Doe"
+      <DetailsInfo
+        title="visitors"
+        figure="59,345"
       />
     </Route>
     <Route exact path="/auth">

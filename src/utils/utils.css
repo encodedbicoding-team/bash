@@ -94,3 +94,15 @@
   color: #888D96;
   cursor: pointer;
 }
+.details_info_container {
+  margin: 0;
+  padding: 4px;
+  background-color: inherit;
+}
+.details_info_title {
+  font-size: 9px;
+  color: #888D96;
+}
+.details_border_right {
+  border-right: .5px solid rgba(136, 141, 150, 0.137);
+}
