@@ -77,7 +77,7 @@ class DashboardComponent extends Component {
                       <Link className="link view-all-link">
                         <div className="capitalize dash-view-all">
                           <span>view all</span>
-                          <i class="lni lni-chevron-right"></i>
+                          <i className="lni lni-chevron-right"></i>
                         </div>
                       </Link>
                     </div>
