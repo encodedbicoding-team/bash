@@ -13,22 +13,22 @@ const UserMainDetails = ({user_details_array}) => {
           id="user_main_details_table"
           className="user_main_details_table_container">
             <div id="usmd_table_head" className="usmd_table_head">
-              <div className="upper font-small font-primary">
+              <div className="upper font-small font-primary font-bold">
                 <p>name</p>
               </div>
-              <div className="upper font-small font-primary">
+              <div className="upper font-small font-primary font-bold">
                 <p>phone #</p>
               </div>
-              <div className="upper font-small font-primary">
+              <div className="upper font-small font-primary font-bold">
                 <p>email</p>
               </div>
-              <div className="upper font-small font-primary">
+              <div className="upper font-small font-primary font-bold">
                 <p>username</p>
               </div>
-              <div className="upper font-small font-primary">
+              <div className="upper font-small font-primary font-bold">
                 <p>status</p>
               </div>
-              <div className="d-none upper font-small font-primary">
+              <div className="d-none">
                 <p>view</p>
               </div>
             </div>

@@ -3,6 +3,7 @@ import {withRouter} from 'react-router';
 import { Link } from 'react-router-dom';
 import { Graph } from '../Dashboard/subComponents';
 import  { DetailsInfo } from '../../utils/utils';
+import { UserTransDetailsBody } from './subComponent';
 import './userdetails.css';
 
 
@@ -14,7 +15,7 @@ class UserDetailsComponent extends Component {
           <Link to="/users" className="items_back_link">
             <div className="user_details_items_back">
               <div>
-                <i class="lni lni-chevron-left"></i>
+                <i className="lni lni-chevron-left"></i>
               </div>
               <div>
                 <p>Back</p>
@@ -89,7 +90,7 @@ class UserDetailsComponent extends Component {
                 </div>
               </div>
             </div>
-            <div className="br">
+            <div className="">
               <div className="u_profile_graph">
                 <Graph w={703} graph_data={dummy_graph_data}/>
               </div>
@@ -140,7 +141,40 @@ class UserDetailsComponent extends Component {
                   </div>
                 </div>
               </div>
-              <div>trans</div>
+              <div className="u_details_transactions">
+                <div>
+                  <p id="u_details_trans_header">Transactions</p>
+                  <div className="u_details_trans_table_head">
+                    <div>
+                      <p className="upper">transaction type</p>
+                    </div>
+                    <div>
+                      <p className="upper">amount</p>
+                    </div>
+                    <div>
+                    <p className="upper">date</p>
+                    </div>
+                    <div className="flex flex-row pr_eye j-space-between d-none">
+                      <i className="lni lni-printer"></i>
+                      <i className="lni lni-eye"></i>
+                    </div>
+                  </div>
+                  <div className="u_details_trans_table_body_cont">
+                    {
+                      dummy_user_trans_details.map((details, idx) => 
+                        <UserTransDetailsBody
+                        key={idx}
+                        amt={details.amt}
+                        date={details.date}
+                        type={details.type}
+                        id={details.id}
+                        />
+                      )
+                    }
+                  </div>
+                </div>
+
+              </div>
             </div>
         </div>
       </div>
@@ -231,5 +265,94 @@ const dummy_graph_data = [{
   pv: 4300,
   amt: 2100
 }]
+
+const dummy_user_trans_details = [
+  {
+    type: 'deposit',
+    amt: '₦5,000',
+    id: 1,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'withdrawal',
+    amt: '₦5,000',
+    id: 2,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'withdrawal',
+    amt: '₦5,000',
+    id: 3,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'deposit',
+    amt: '₦5,000',
+    id: 4,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'deposit',
+    amt: '₦5,000',
+    id: 5,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'withdrawal',
+    amt: '₦5,000',
+    id: 6,
+    date: '24/JAN/2020',
+  },
+  {
+    type: 'deposit',
+    amt: '₦5,000',
+    id: 7,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'deposit',
+    amt: '₦5,000',
+    id: 1,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'withdrawal',
+    amt: '₦5,000',
+    id: 2,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'withdrawal',
+    amt: '₦5,000',
+    id: 3,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'deposit',
+    amt: '₦5,000',
+    id: 4,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'deposit',
+    amt: '₦5,000',
+    id: 5,
+    date: '24/JAN/2020'
+  },
+  {
+    type: 'withdrawal',
+    amt: '₦5,000',
+    id: 6,
+    date: '24/JAN/2020',
+  },
+  {
+    type: 'deposit',
+    amt: '₦5,000',
+    id: 7,
+    date: '24/JAN/2020'
+  }
+
+
+]
 
 export default withRouter(UserDetailsComponent)
