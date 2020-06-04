@@ -1,0 +1,15 @@
+.categories_main_container{
+  padding: 10px;
+  padding-right: 30px;
+}
+.block_cat_main_container {
+  border-top: 1px solid #EBECED;
+}
+.block_cat_sub_container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 33% 33% 33%;
+  height: 350px;
+  margin: auto;
+  overflow: scroll;
+}

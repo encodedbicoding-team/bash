@@ -30,6 +30,12 @@
   color: #888D96;
   margin: 15px 0 15px 0;
 }
+.page_title_cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 .link{
   text-decoration: none;
 }
@@ -45,4 +51,24 @@
 .j-space-between {
   justify-content: space-between;
   align-items: center;
+}
+.m-top20 {
+  margin-top: 20px;
+}
+.w-100 {
+  width: 100%;
+}
+.page_chart_data {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  padding: 40px 0 40px 0;
+}
+.page_chart_graph {
+  margin-right: 2%;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #EBECED;
+  display: flex;
+  flex-direction: column;
+  border-radius: 25px;
 }
