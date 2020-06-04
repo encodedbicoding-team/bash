@@ -4,7 +4,11 @@ import DashboardPage from '../pages/dashboard';
 import LoginPage from '../pages/login';
 import UserPage from '../pages/users';
 import UserDetailsPage from '../pages/userDetails';
-import { DetailsInfo } from '../utils/utils';
+import BlocksPage from '../pages/blocks';
+import CategoriesPage from '../pages/categories';
+import TransactionsPage from '../pages/transactions';
+import SettingsPage from '../pages/settings';
+import { DetailsInfo, BlockCateDetails, PieGraph, LineGraph } from '../utils/utils';
 import { UserMainDetails, UserDetailsContent } from '../components/User/subComponents';
 
 export default () => (  
@@ -13,10 +17,19 @@ export default () => (
       <LoginPage/>
     </Route>
     <Route exact path="/bc">
-      <DetailsInfo
-        title="visitors"
-        figure="59,345"
+      <BlockCateDetails
+        title="interantional polititcs"
+        keyName="questions"
+        value="400"
+        showImg={false}
+        active={false}
+        id={1}
       />
+      <PieGraph
+        series={[43, 55, 41]}
+        width="380"
+      />
+      <LineGraph/>
     </Route>
     <Route exact path="/auth">
       <LoginPage/>
@@ -29,6 +42,18 @@ export default () => (
     </Route>
     <Route exact path="/users/d/:id">
       <UserDetailsPage/>
+    </Route>
+    <Route exact path="/blocks">
+      <BlocksPage/>
+    </Route>
+    <Route exact path="/categories">
+      <CategoriesPage/>
+    </Route>
+    <Route exact path="/transactions">
+      <TransactionsPage/>
+    </Route>
+    <Route exact path="/settings">
+      <SettingsPage/>
     </Route>
   </Switch>
 )
