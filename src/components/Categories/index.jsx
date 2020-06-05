@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { PageNavigation } from '../../utils/pageNavigation';
-import { DetailsInfo, BlockCateDetails, PieGraph } from '../../utils/utils';
+import { DetailsInfo, BlockCateDetails, PieGraph, LineGraph } from '../../utils/utils';
 import './categories.css';
 
 class CategoriesComponent extends Component {
@@ -11,6 +11,8 @@ class CategoriesComponent extends Component {
     current_category_option_to_show: '',
     pieGraphLabels: [],
     pieGraphSeries: [],
+    lineGraphLabels: [],
+    lineGraphSeries: [],
   }
 
   componentDidMount() {
@@ -24,6 +26,7 @@ class CategoriesComponent extends Component {
       }
     });
     this.handleSetPieGraphData();
+    this.handleSetLineGraphData();
   }
 
   handleSetCurrentSearch() {
@@ -46,6 +49,14 @@ class CategoriesComponent extends Component {
     const series = [20, 40, 12, 98, 100, 34]
 
     this.setState({ pieGraphLabels: labels, pieGraphSeries: series});
+  }
+  handleSetLineGraphData () {
+    const labels = ['Lily', 'Azalea', 'Alyssa', 'Jasmine', 'Cedar', 'Sage']
+    const series = [{
+      data: [20, 40, 12, 98, 100, 34]
+    }]
+
+    this.setState({ lineGraphLabels: labels, lineGraphSeries: series});
   }
   handleSetCategoryOption(id) {
     if (this.state.current_category_option_to_show === id) {
@@ -99,13 +110,17 @@ class CategoriesComponent extends Component {
           </div>
           <div className="m-top20 page_chart_data">
               <div className="page_chart_graph">
-                graph
+              <div>
+                  <LineGraph 
+                   series={this.state.lineGraphSeries}
+                  labels={this.state.lineGraphLabels}
+                  />
+                </div>
               </div>
               <div>
                 <PieGraph
                   labels={this.state.pieGraphLabels}
                   series={this.state.pieGraphSeries}
-                  width={380}
                 />
               </div>
           </div>

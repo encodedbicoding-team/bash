@@ -60,7 +60,7 @@
 }
 .page_chart_data {
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 50% 50%;
   padding: 40px 0 40px 0;
 }
 .page_chart_graph {

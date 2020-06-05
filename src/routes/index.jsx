@@ -27,9 +27,13 @@ export default () => (
       />
       <PieGraph
         series={[43, 55, 41]}
-        width="380"
+        // width="380"
       />
-      <LineGraph/>
+      <LineGraph 
+        series={[{
+          data: [23, 34, 12, 54, 32]
+        }]}
+      />
     </Route>
     <Route exact path="/auth">
       <LoginPage/>
