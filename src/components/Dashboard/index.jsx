@@ -85,7 +85,7 @@ class DashboardComponent extends Component {
                 </div>
               </div>
             </div>
-            <div className="bl">
+            <div className="">
               <div>
                 <div className="dash_minor_container">
                   <div className="">

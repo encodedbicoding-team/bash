@@ -123,11 +123,23 @@ const PieGraph = ({options, series, width, labels}) => {
     )
 }
 
-const LineGraph = () => {
+const LineGraph = ({options, series, labels}) => {
+  if (!options) {
+    options = {
+      labels: labels || [],
+      stroke: {
+        curve: 'straight',
+        width: 1,
+        lineCap: 'butt',
+      },
+    }
+  }
 
   return (
     <div>
-      Line graph
+      <div>
+        <Chart type="line" options={options} series={series}/>
+      </div>
     </div>
   )
 }

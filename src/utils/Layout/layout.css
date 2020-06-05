@@ -16,7 +16,7 @@
   grid-template-areas:
   "nv nv nv nv"
   "sd mb mb mb"
-  "ft ft ft ft";
+  "sd ft ft ft";
 }
 .navigation {
   grid-area: nv;

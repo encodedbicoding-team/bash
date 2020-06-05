@@ -2,21 +2,32 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { PageNavigation } from '../../utils/pageNavigation';
 import { UserMainDetails } from './subComponents';
-import { DetailsInfo } from '../../utils/utils';
+import { DetailsInfo, LineGraph } from '../../utils/utils';
 import './user.css'
 
 class UserComponent extends Component {
 
     state = {
-      current_search: ''
+      current_search: '',
+      lineGraphLabels: [],
+      lineGraphSeries: [],
     }
 
   componentDidMount() {
     this.handleSetCurrentSearch()
+    this.handleSetLineGraphData();
   }
   handleSetCurrentSearch() {
     const search = this.props.location.search.split('=')[1];
     this.setState({ current_search: search || 'all'});
+  }
+  handleSetLineGraphData () {
+    const labels = ['Lily', 'Azalea', 'Alyssa', 'Jasmine', 'Cedar', 'Sage']
+    const series = [{
+      data: [20, 40, 12, 98, 100, 34]
+    }]
+
+    this.setState({ lineGraphLabels: labels, lineGraphSeries: series});
   }
   render() {
     return (
@@ -49,7 +60,12 @@ class UserComponent extends Component {
               </div>
           </div>
           <div>
-            graph place
+            <div className="user_line_graph">
+              <LineGraph 
+                series={this.state.lineGraphSeries}
+                labels={this.state.lineGraphLabels}
+              />
+            </div>
           </div>
           <div className="user_details_section">
             <UserMainDetails/>
