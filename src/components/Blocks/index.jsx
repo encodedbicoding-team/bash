@@ -12,7 +12,7 @@ class BlocksComponent extends Component {
     pieGraphLabels: [],
     pieGraphSeries: [],
     lineGraphLabels: [],
-    lineGraphSeries: []
+    lineGraphSeries: [],
   }
   componentDidMount() {
     this.handleSetCurrentSearch();
