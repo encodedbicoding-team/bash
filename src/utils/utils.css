@@ -99,7 +99,7 @@
 }
 .details_info_container {
   margin: 0;
-  padding: 4px;
+  padding: 4px 4px 4px 8px;
   background-color: inherit;
 }
 .details_info_title {
