@@ -17,7 +17,7 @@ const UserTransDetailsBody = ({amt, date, id, type}) => {
             {amt}
         </p>
       </div>
-      <div>
+      <div className="user_trans_date">
         <p className="upper">{date}</p>
       </div>
       <div className="flex flex-row pr_eye j-space-between">

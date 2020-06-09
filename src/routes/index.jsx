@@ -8,8 +8,6 @@ import BlocksPage from '../pages/blocks';
 import CategoriesPage from '../pages/categories';
 import TransactionsPage from '../pages/transactions';
 import SettingsPage from '../pages/settings';
-import { DetailsInfo, BlockCateDetails, PieGraph, LineGraph } from '../utils/utils';
-import { UserMainDetails, UserDetailsContent } from '../components/User/subComponents';
 
 export default () => (  
   <Switch>
@@ -17,23 +15,6 @@ export default () => (
       <LoginPage/>
     </Route>
     <Route exact path="/bc">
-      <BlockCateDetails
-        title="interantional polititcs"
-        keyName="questions"
-        value="400"
-        showImg={false}
-        active={false}
-        id={1}
-      />
-      <PieGraph
-        series={[43, 55, 41]}
-        // width="380"
-      />
-      <LineGraph 
-        series={[{
-          data: [23, 34, 12, 54, 32]
-        }]}
-      />
     </Route>
     <Route exact path="/auth">
       <LoginPage/>

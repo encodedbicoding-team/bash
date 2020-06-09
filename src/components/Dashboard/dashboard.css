@@ -93,20 +93,16 @@
 }
 
 .user_trans_deposit_container {
-  background: #E7F9F3 0% 0% no-repeat padding-box;
-  box-shadow: 0px 20px 40px #B1103000;
-  border: 1px solid #E7F9F3;
   border-radius: 100px;
   opacity: 1;
   text-align: center;
-  width: 70px;
-  padding: 3px;
+  width: 78px;
+  padding: 4px;
 }
 .user_trans_deposit_container p {
   font-size: 12px;
   margin: auto;
   text-transform: capitalize;
-  color: #3FC89C;
   letter-spacing: 0px;
 }
 .user_trans_amount{

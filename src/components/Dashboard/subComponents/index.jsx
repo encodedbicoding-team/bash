@@ -86,20 +86,20 @@ const Graph = ({graph_data, w}) => (
   </>
 )
 
-const UserTransDetails = ({img_src, first_name, last_name, amt, trans_date}) => (
+const UserTransDetails = ({img_src, first_name, last_name, amt, trans_date, type}) => (
   <>
     <div className="user_trans_contents">
         <div className="user_name_image">
-          <div className="details_main_image_container br">
-              <img width="100%" height="auto" src={img_src} alt="bash users transactions"/>
+          <div className="details_main_image_container">
+              <img width="100%" height="auto" src={require('../../../assets/images/random_user.jpg')} alt="bash users transactions"/>
           </div>
           <div className="details_main_user_container">
               <p className="flex-g-1 capitalize">{first_name}</p>
               <p className="capitalize font-small">{last_name}</p>
           </div>
         </div>
-        <div className="user_trans_deposit_container">
-          <p>Deposit</p>
+        <div className={type === 'deposit' ? 'user_trans_deposit_container c-dep' : 'user_trans_deposit_container c-with'}>
+            <p>{type}</p>
         </div>
         <div className="user_trans_amount">
           <p>{`₦${amt}`}</p>
