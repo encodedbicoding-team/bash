@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { PageNavigation } from '../../utils/pageNavigation';
 import { DetailsInfo, PieGraph, LineGraph } from '../../utils/utils';
+import { TransMainDetail } from './subComponents';
 import './transactions.css';
 
 class TransactionsComponent extends Component {
@@ -116,10 +117,117 @@ class TransactionsComponent extends Component {
                 />
               </div>
           </div>
+          <div className="m-top20 all-trans-container">
+              <div className="all-trans-grid all-trans-header">
+                <div className="flex flex-col flex-center">
+                  <p className="upper font-small c-1 font-bold">name</p>
+                </div>
+                <div className="flex flex-col flex-center">
+                  <p className="upper font-small c-1 font-bold">transaction type</p>
+                </div>
+                <div className="flex flex-col flex-center"> 
+                  <p className="upper font-small c-1 font-bold">amount</p>
+                </div>
+                <div className="flex flex-col flex-center">
+                  <p className="upper font-small c-1 font-bold">date</p>
+                </div>
+                <div className="op-0">print-view</div>
+              </div>
+              <div className="all-tran-main-body">
+                  {
+                    dummy_all_transaction.map((trans, idx) => 
+                    <TransMainDetail
+                      key={idx}
+                      image_url={trans.image_url}
+                      first_name={trans.first_name}
+                      last_name={trans.last_name}
+                      type={trans.type}
+                      amt={trans.amt}
+                      date={trans.date}
+                    />
+                    )
+                  }
+              </div>
+          </div>
         </div>
       </div>
     )
   }
 }
+
+const dummy_all_transaction = [
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    type: 'deposit',
+    amt: '5000',
+    date: '24/jan/2020',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    type: 'deposit',
+    amt: '5000',
+    date: '24/jan/2020',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    type: 'withdrawal',
+    amt: '5000',
+    date: '24/jan/2020',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    type: 'withdrawal',
+    amt: '5000',
+    date: '24/jan/2020',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    type: 'deposit',
+    amt: '5000',
+    date: '24/jan/2020',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    type: 'deposit',
+    amt: '5000',
+    date: '24/jan/2020',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    type: 'deposit',
+    amt: '5000',
+    date: '24/jan/2020',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    type: 'deposit',
+    amt: '5000',
+    date: '24/jan/2020',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    type: 'deposit',
+    amt: '5000',
+    date: '24/jan/2020',
+  },
+]
 
 export default withRouter(TransactionsComponent);

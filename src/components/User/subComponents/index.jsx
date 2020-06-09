@@ -37,7 +37,7 @@ const UserMainDetails = ({user_details_array}) => {
                   user_details_array.map((ud, idx) => 
                   <UserDetailsContent
                     key={idx}
-                    img_url={ud.img_url}
+                    img_url={require('../../../assets/images/random_user.jpg')}
                     id={ud.id}
                     phone={ud.phone}
                     email={ud.email}
@@ -75,7 +75,7 @@ const UserDetailsContent = (
       className="font-small font-primary td-none usmd_table_body"
     >
       <div className="flex flex-row usmd_img_container">
-        <div className="usmd_img_container_img br usmd_detail_item">
+        <div className="usmd_img_container_img usmd_detail_item">
           <img width="100%" height="auto" src={img_url} alt="user details"/>
         </div>
         <div className="usmd_img_container_text usmd_detail_item capitalize">
@@ -95,7 +95,7 @@ const UserDetailsContent = (
         <p>{status}</p>
       </div>
       <div className="usmd_detail_item">
-        <i class="lni lni-eye"></i>
+        <i className="lni lni-eye"></i>
       </div>
     </Link>
   </div>

@@ -34,8 +34,8 @@ class UserDetailsComponent extends Component {
                 <div className="user_details_profile_container">
                   <div className="user_details_profile_head">
                     <div className="u_profile_h">
-                      <div className="u_profile_image_c br">
-                        <img src="./d" alt="user profile logo" width="100%" height="auto"/>
+                      <div className="u_profile_image_c">
+                        <img src={require('../../assets/images/random_user.jpg')} alt="user profile logo" width="100%" height="auto"/>
                       </div>
                       <div>
                         <p 

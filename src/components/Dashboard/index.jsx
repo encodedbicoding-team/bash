@@ -70,6 +70,7 @@ class DashboardComponent extends Component {
                           first_name={user_data.first_name}
                           last_name={user_data.last_name}
                           trans_date={user_data.trans_date}
+                          type={user_data.type}
                         />
                       ))
                     }
@@ -221,35 +222,40 @@ const dummy_user_transaction_data = [
     first_name: 'pascal',
     last_name: 'dabibi',
     amt: '5,000',
-    trans_date: '21/jan/2020'
+    trans_date: '21/jan/2020',
+    type: 'deposit'
   },
   {
     img_src: '',
     first_name: 'francis',
     last_name: 'nzene',
     amt: '5,000',
-    trans_date: '21/jan/2020'
+    trans_date: '21/jan/2020',
+    type: 'deposit'
   },
   {
     img_src: '',
     first_name: 'francisca',
     last_name: 'nzena',
     amt: '6,000',
-    trans_date: '21/jan/2020'
+    trans_date: '21/jan/2020',
+    type: 'deposit'
   },
   {
     img_src: '',
     first_name: 'john',
     last_name: 'doe',
     amt: '5,000',
-    trans_date: '21/jan/2020'
+    trans_date: '21/jan/2020',
+    type: 'deposit'
   },
   {
     img_src: '',
     first_name: 'encoded',
     last_name: 'bicoding',
     amt: '5,000',
-    trans_date: '21/jan/2020'
+    trans_date: '21/jan/2020',
+    type: 'withdrawal'
   },
 ]
 

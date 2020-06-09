@@ -1,6 +1,6 @@
 .user_details_content_container{
   box-shadow: none;
-  transition:  all .3s ease;;
+  transition:  all .3s ease;
 }
 .user_details_content_container:hover {
   box-shadow: 0 3px 13px 0 rgba(0,0,0,.1);
@@ -11,6 +11,12 @@
   border-radius: 2px;
   opacity: 1;
 } 
+.user_trans_date{
+  font-size: 10px;
+  color: #888D96 !important;
+  text-transform: uppercase;
+  font-weight: 800;
+}
 #user_main_details_table{
   position: relative;
   width: 100%;
@@ -26,11 +32,15 @@
 .d-none {
   opacity: 0;
 }
-#usmd_table_head,
+#usmd_table_head {
+  display: grid;
+  grid-template-columns: 25% 16% 16% 16% 16% auto;
+  padding: 20px;
+}
 .usmd_table_body {
   display: grid;
   grid-template-columns: 25% 16% 16% 16% 16% auto;
-  padding: 10px;
+  padding: 6px;
 }
 .usmd_table_head{
   background-color: #fff;
