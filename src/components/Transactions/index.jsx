@@ -47,9 +47,6 @@ class TransactionsComponent extends Component {
         <div>
           <div className="page_title_cont">
             <p className="page_title">Transactions</p>
-            <div>
-              <p>new transaction</p>
-            </div>
           </div>
           <div>
             <PageNavigation

@@ -95,7 +95,7 @@ class DashboardComponent extends Component {
                         image_name="lni lni-grid-alt"
                         sub_text="block"
                         sub_data="12"
-                        url="block"
+                        url="blocks"
                       />
                     </div>
                   </div>

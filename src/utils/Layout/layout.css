@@ -38,3 +38,12 @@
   grid-area: ft;
   background: #F1F2F3 0% 0% no-repeat padding-box;
 }
+.footer_content {
+  width: 100%;;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #888D96;
+  font-size: 13px;
+}
