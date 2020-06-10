@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import Button from '../Buttons';
 import { PageNavigation } from '../../utils/pageNavigation';
 import { DetailsInfo, BlockCateDetails, PieGraph, LineGraph } from '../../utils/utils';
 import './categories.css';
@@ -72,7 +73,7 @@ class CategoriesComponent extends Component {
           <div className="page_title_cont">
             <p className="page_title">Categories</p>
             <div>
-              <p>new categories</p>
+              <Button text="New Categories" add={true} action={() => {}} width="100%"/>
             </div>
           </div>
           <div>

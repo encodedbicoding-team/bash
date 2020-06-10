@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import Button from '../Buttons';
 import { PageNavigation } from '../../utils/pageNavigation';
 import { DetailsInfo, BlockCateDetails, PieGraph, LineGraph } from '../../utils/utils';
 import './blocks.css'
@@ -74,7 +75,7 @@ class BlocksComponent extends Component {
           <div className="page_title_cont">
             <p className="page_title">Blocks</p>
             <div>
-              <p>new block</p>
+              <Button text="New Button" add={true} action={() => {}} width="100%"/>
             </div>
           </div>
           <div>

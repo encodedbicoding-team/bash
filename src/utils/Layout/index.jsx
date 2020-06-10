@@ -32,8 +32,10 @@ class Layout extends Component {
             this.props.children
           }
           </section>
-          <section className="footer">
-          <div>ft</div>
+          <section className="footer flex flex-center">
+            <div className="footer_content">
+                <footer>Bash <span>&copy;</span> {new Date().getFullYear()}. All Rights Reserved</footer>
+            </div>
           </section>
         </section>
       </div>

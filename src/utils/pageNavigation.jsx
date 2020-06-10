@@ -50,7 +50,7 @@ const PageNavigation = ({page_details, current_search, date_func}) => {
       <div className="page_nav_date_container" onClick={() => setShowDateItems(!showDateItems)}>
          <div className="nav_date_content">
            <span>Date</span>
-           <span>></span>
+           <span className="caret">></span>
          </div>
          {
            showDateItems ? 
