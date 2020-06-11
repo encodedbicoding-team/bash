@@ -19,7 +19,7 @@ export default ({image_class, text, url, active = false, image_color}) => {
                 <p>{text}</p>
             </div>
             <div>
-            <div className={active ? "dot" : ""}></div>
+            <div className={active ? "dot_animate dot" : "dot_animate dot-zero"}></div>
             </div>
         </div>
       </div>

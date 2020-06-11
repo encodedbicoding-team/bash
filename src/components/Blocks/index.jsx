@@ -75,7 +75,7 @@ class BlocksComponent extends Component {
           <div className="page_title_cont">
             <p className="page_title">Blocks</p>
             <div>
-              <Button text="New Button" add={true} action={() => {}} width="100%"/>
+              <Button text="New Button" add={true} action={() => {console.log('blocks')}} width="100%"/>
             </div>
           </div>
           <div>
