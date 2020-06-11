@@ -111,17 +111,17 @@ class SettingsComponent extends Component {
                         <DetailsInfo
                           title="total"
                           figure="19"
-                          width="120px"
+                          width="90px"
                         />
                         <DetailsInfo
                           title="role one"
                           figure="8"
-                          width="120px"
+                          width="90px"
                         />
                         <DetailsInfo
                           title="role two"
                           figure="3"
-                          width="120px"
+                          width="100px"
                           border_right={false}
                         />
                       </div>
