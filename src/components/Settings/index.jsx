@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { showModal } from '../../features/globals/Modal';
 import Buttons from '../Buttons';
 import { DetailsInfo } from '../../utils/utils';
 import { AdminUserDetail } from './subComponents';
@@ -126,7 +128,12 @@ class SettingsComponent extends Component {
                         />
                       </div>
                       <div>
-                        <Buttons add={true} text="add admin" width="100%"/>
+                        <Buttons 
+                          add={true} 
+                          text="add admin" 
+                          width="100%"
+                          action={() => this.props.showModal('add_admin')}
+                          />
                       </div>
                   </div>
                   <div className="m-top20">
@@ -223,5 +230,8 @@ const dummy_admin = [
     role: 'admin',
   }
 ]
+const actions = {
+  showModal,
+}
 
-export default SettingsComponent;
+export default connect(null, actions)(SettingsComponent);

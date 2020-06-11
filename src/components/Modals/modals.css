@@ -51,6 +51,9 @@
   border: 1px solid #EBECED;
   border-radius: 4px; 
 }
+.empty_img_radius {
+  border-radius: 50% !important;
+}
 .add_cat_name_input {
   padding: 12px;
   width: 100%;

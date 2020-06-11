@@ -39,7 +39,7 @@ class CategoryModal extends Component {
               <div className="w-100 file_chooser_img" onClick={() => document.querySelector('#categoryFileUpload').click()}>
                   {
                     this.state.imageUrlToUpload ?
-                    <div></div>
+                    <div>image uploaded</div>
                     :
                     <div className="empty_img">
                       <i className="lni lni-plus c-1"></i>

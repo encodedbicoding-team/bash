@@ -5,7 +5,7 @@ import SideNavComponent from '../../components/SideNav/SideComponent';
 import TopNav from '../../components/TopNav';
 import './layout.css';
 import Modal from '../../app/globals/modal';
-import { CategoryModal, BlocksModal } from '../../components/Modals';
+import { CategoryModal, BlocksModal, AddAdminModal } from '../../components/Modals';
 
 
 class Layout extends Component {
@@ -21,6 +21,9 @@ class Layout extends Component {
             :
             this.props.modalShow === 'blocks' ?
             <BlocksModal/>
+            :
+            this.props.modalShow === 'add_admin' ?
+            <AddAdminModal/>
             :
             ''
           }
