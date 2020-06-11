@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import './utils.css';
 
 const PageNavigation = ({page_details, current_search, date_func}) => {
@@ -50,7 +52,9 @@ const PageNavigation = ({page_details, current_search, date_func}) => {
       <div className="page_nav_date_container" onClick={() => setShowDateItems(!showDateItems)}>
          <div className="nav_date_content">
            <span>Date</span>
-           <span className="caret">></span>
+           <span className="caret">
+             <FontAwesomeIcon icon={faCaretDown}/>
+           </span>
          </div>
          {
            showDateItems ? 

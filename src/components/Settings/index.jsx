@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Buttons from '../Buttons';
+import { DetailsInfo } from '../../utils/utils';
+import { AdminUserDetail } from './subComponents';
 import './settings.css';
 
 class SettingsComponent extends Component {
@@ -103,7 +105,59 @@ class SettingsComponent extends Component {
                   </div>
                 </div>
                 :
-                <div>admin</div>
+                <div className="w-100 admin_users_main_container">
+                  <div className="flex flex-row j-space-between">
+                      <div className="flex flex-row">
+                        <DetailsInfo
+                          title="total"
+                          figure="19"
+                          width="90px"
+                        />
+                        <DetailsInfo
+                          title="role one"
+                          figure="8"
+                          width="90px"
+                        />
+                        <DetailsInfo
+                          title="role two"
+                          figure="3"
+                          width="100px"
+                          border_right={false}
+                        />
+                      </div>
+                      <div>
+                        <Buttons add={true} text="add admin" width="100%"/>
+                      </div>
+                  </div>
+                  <div className="m-top20">
+                    <div className="all_admin_grid all_admin_header">
+                        <div className="flex flex-col flex-center">
+                          <p className="upper font-small c-1 font-bold">name</p>
+                        </div>
+                        <div className="flex flex-col flex-center">
+                          <p className="upper font-small c-1 font-bold">name</p>
+                        </div>
+                        <div className="flex flex-col flex-center">
+                          <p className="upper font-small c-1 font-bold">name</p>
+                        </div>
+                        <div className="op-0">edit-delete-view</div>
+                    </div>
+                    <div className="all_admin_main_body">
+                        {
+                          dummy_admin.map((admin, idx) => 
+                            <AdminUserDetail
+                              key={idx}
+                              image_url={admin.image_url}
+                              email={admin.email}
+                              role={admin.role}
+                              first_name={admin.first_name}
+                              last_name={admin.last_name}
+                            />
+                          )
+                        }
+                    </div>
+                  </div>
+                </div>
               }
           </div>
         </div>
@@ -111,5 +165,63 @@ class SettingsComponent extends Component {
     )
   }
 }
+const dummy_admin = [
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'johndoe@gmail.com',
+    role: 'admin',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'johndoe@gmail.com',
+    role: 'admin',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'johndoe@gmail.com',
+    role: 'admin',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'johndoe@gmail.com',
+    role: 'admin',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'johndoe@gmail.com',
+    role: 'admin',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'johndoe@gmail.com',
+    role: 'admin',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'johndoe@gmail.com',
+    role: 'admin',
+  },
+  {
+    image_url: '',
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'johndoe@gmail.com',
+    role: 'admin',
+  }
+]
 
 export default SettingsComponent;
