@@ -34,11 +34,20 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.dot_animate {
+  border-radius: 50%;
+  background-color: #505560;
+  transition: all 1s ease-in;
+  opacity: 1;
+}
 .dot{
   content: '';
   padding: 2px;
-  border-radius: 50%;
-  background-color: #505560;
+  opacity: 1;
+}
+.dot-zero {
+  opacity: 0;
 }
 
 .side_nav_text{

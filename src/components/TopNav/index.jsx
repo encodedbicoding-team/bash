@@ -17,17 +17,17 @@ class TopNav extends Component {
     window.onclick = ((e) => {
       let eclass = e.target.getAttribute('class');
       if (!eclass) {
-        this.setState({ showSearchPanel: false })
+        this.setState({ showSearchPanel: false, searchValue: '' })
       }
       if (eclass) {
         if ((eclass === 'show_search_panel_cont' || eclass==='searchInput') && this.state.showSearchPanel) {
           return;
         }
-        if (eclass === 'lni lni-search-alt' && !this.state.showSearchPanel) {
-          this.setState({ showSearchPanel: !this.state.showSearchPanel });
+        if ((eclass === 'lni lni-search-alt' || eclass === 'search_icon') && !this.state.showSearchPanel) {
+          this.setState({ showSearchPanel: !this.state.showSearchPanel, searchValue: '' });
         }
-        if (eclass !== 'lni lni-search-alt' && this.state.showSearchPanel) {
-          this.setState({ showSearchPanel: false })
+        if ((eclass !== 'lni lni-search-alt' && eclass !== 'search_icon') && this.state.showSearchPanel) {
+          this.setState({ showSearchPanel: false, searchValue: '' })
         }
       }
     })
@@ -42,7 +42,7 @@ class TopNav extends Component {
   render() {
     return (
       <>
-      <div className={this.state.showSearchPanel ? 'show_search_panel_cont' : 'hide_search_panel'}>
+      <div className={this.state.showSearchPanel ? 'show_search_panel_cont search_cont' : 'hide_search_panel search_cont'}>
         <div className="flex flex-row flex-center">
           <div onClick={() => this.handleShowSearchPanel()} className="close_search">
             <i className="lni lni-chevron-right"></i>
