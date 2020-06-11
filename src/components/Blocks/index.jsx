@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import Button from '../Buttons';
 import { PageNavigation } from '../../utils/pageNavigation';
+import { showModal } from '../../features/globals/Modal';
 import { DetailsInfo, BlockCateDetails, PieGraph, LineGraph } from '../../utils/utils';
 import './blocks.css'
 
@@ -75,7 +77,7 @@ class BlocksComponent extends Component {
           <div className="page_title_cont">
             <p className="page_title">Blocks</p>
             <div>
-              <Button text="New Button" add={true} action={() => {console.log('blocks')}} width="100%"/>
+              <Button text="New Block" add={true} action={() => this.props.showModal('blocks')} width="100%"/>
             </div>
           </div>
           <div>
@@ -193,4 +195,8 @@ const dummy_block_data = [
   },
 ]
 
-export default withRouter(BlocksComponent);
+const actions = {
+  showModal,
+}
+
+export default connect(null, actions)(withRouter(BlocksComponent));

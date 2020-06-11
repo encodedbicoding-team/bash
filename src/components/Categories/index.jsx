@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Button from '../Buttons';
 import { PageNavigation } from '../../utils/pageNavigation';
 import { DetailsInfo, BlockCateDetails, PieGraph, LineGraph } from '../../utils/utils';
+import { showModal } from '../../features/globals/Modal';
 import './categories.css';
 
 class CategoriesComponent extends Component {
@@ -14,6 +16,7 @@ class CategoriesComponent extends Component {
     pieGraphSeries: [],
     lineGraphLabels: [],
     lineGraphSeries: [],
+    showCategoryModal: true,
   }
 
   componentDidMount() {
@@ -45,6 +48,9 @@ class CategoriesComponent extends Component {
       return false;
     }
   }
+  handleShowModal() {
+    this.setState({showCategoryModal: !this.state.showCategoryModal })
+  }
   handleSetPieGraphData () {
     const labels = ['Lily', 'Azalea', 'Alyssa', 'Jasmine', 'Cedar', 'Sage']
     const series = [20, 40, 12, 98, 100, 34]
@@ -73,7 +79,7 @@ class CategoriesComponent extends Component {
           <div className="page_title_cont">
             <p className="page_title">Categories</p>
             <div>
-              <Button text="New Categories" add={true} action={() => {}} width="100%"/>
+              <Button text="New Categories" add={true} action={() => this.props.showModal('categories')} width="100%"/>
             </div>
           </div>
           <div>
@@ -196,4 +202,8 @@ const dummy_categories_data = [
   },
 ]
 
-export default withRouter(CategoriesComponent);
+const actions = {
+  showModal,
+}
+
+export default connect(null, actions)(withRouter(CategoriesComponent));

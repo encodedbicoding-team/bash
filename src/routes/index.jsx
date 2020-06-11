@@ -8,6 +8,7 @@ import BlocksPage from '../pages/blocks';
 import CategoriesPage from '../pages/categories';
 import TransactionsPage from '../pages/transactions';
 import SettingsPage from '../pages/settings';
+import CategoryModal from '../components/Modals/Blocks';
 
 export default () => (  
   <Switch>
@@ -15,6 +16,7 @@ export default () => (
       <LoginPage/>
     </Route>
     <Route exact path="/bc">
+      <CategoryModal/>
     </Route>
     <Route exact path="/auth">
       <LoginPage/>
