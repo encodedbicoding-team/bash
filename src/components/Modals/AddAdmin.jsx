@@ -77,12 +77,15 @@ class AddAdminModal extends Component {
         <div className="m-top20">
           <div className="add_cat_name_input">
             <label htmlFor="role" className="c-1">role</label>
-            <input 
-              type="text" 
-              name="role" 
-              placeholder="select a role"
-              value={this.state.role} 
-              onChange={(e) => this.handleSetInput(e)}/>
+              <select
+                name="role"
+                value={this.state.role}
+                onChange={(e) => this.handleSetInput(e)}
+              >
+                <option selected>Select a role</option>
+                <option value="option">Option</option>
+                <option value="option">Option</option>
+              </select>
           </div>
         </div>
         <div className="m-top20">

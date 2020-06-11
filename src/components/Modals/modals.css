@@ -61,10 +61,12 @@
   border: 1px solid #EBECED;
   border-radius: 8px;
 }
-.add_cat_name_input input {
+.add_cat_name_input input,
+.add_cat_name_input select {
   border: none;
   width: 100%;
   outline: none;
+  background-color: inherit;
 }
 .add_cat_name_input label{
   display: block;
