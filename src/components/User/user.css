@@ -1,0 +1,14 @@
+.user_main_container{
+  padding: 10px;
+  padding-right: 30px;
+}
+.user_details_section {
+  margin-top: 20px;
+}
+.u_d_place {
+  padding: 15px;
+}
+.user_line_graph {
+  width: 70%;
+  margin: 12px 0 12px 0
+}

@@ -1,0 +1,98 @@
+/* 
+  Here goes Category modals style
+*/
+
+.item_modal_container {
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 17px;
+  padding: 19px;
+  opacity: 1;
+  z-index: 3000;
+}
+.modal_title {
+  color: #505560;
+  font-size: 17px;
+  text-transform: capitalize;
+}
+.modal_close {
+  color: #D4145A;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.file_chooser_img {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.file_chooser_img p{
+  margin: 0 0 0 15px;
+  font-size: 13px;
+}
+.modal_close:hover {
+  background: rgba(212, 20, 90, 0.096) 0% 0% no-repeat padding-box; 
+}
+.empty_img {
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  background: #F1F2F3 0% 0% no-repeat padding-box;
+  border: 1px solid #EBECED;
+  border-radius: 4px; 
+}
+.empty_img_radius {
+  border-radius: 50% !important;
+}
+.add_cat_name_input {
+  padding: 12px;
+  width: 100%;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #EBECED;
+  border-radius: 8px;
+}
+.add_cat_name_input input,
+.add_cat_name_input select {
+  border: none;
+  width: 100%;
+  outline: none;
+  background-color: inherit;
+}
+.add_cat_name_input label{
+  display: block;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.question_file_uploader {
+  width: 100%;
+  padding: 12px;
+  background: #F1F2F3 0% 0% no-repeat padding-box;
+  border: 1px solid #EBECED;
+  border-radius: 8px; 
+  cursor: pointer;
+}
+.upload_text_c {
+  margin: 0 0 0 20px;
+}
+.upload_a {
+  font-size: 13px;
+}
+.upload_b {
+  font-size: 12px;
+}
+.cancel {
+  margin: 0 12px 0 0;
+  color: #D4145A;
+  font-size: 13px;
+  cursor: pointer;
+}

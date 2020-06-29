@@ -1,0 +1,129 @@
+.sublink_component_image{
+  flex-grow: 1;
+}
+.sublink_link{
+  text-decoration: none;
+  color: #B6B9BF;
+  position: relative;
+}
+.sublink_container_size {
+  width: 160px;
+  height: 200px;
+}
+.large_sublink_container_size {
+  width: 345px;
+  height: 350px;
+  z-index: 300;
+}
+.recharts-surface {
+  cursor: pointer;
+  padding: 0;
+  margin: -5px;
+}
+.large_sublink_sub_content {
+  flex-grow: 1;
+}
+.large_sublink_container{
+  padding: 0px !important;
+  position: relative;
+  top: -19px !important;
+}
+.sublink_container,
+.large_sublink_container {
+  position: relative;
+  left: 0;
+  top: 0;
+  padding: 15px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #EBECED;
+  border-radius: 13px;
+  overflow: hidden;
+  transition: all .7s ease;
+  margin: 8px;
+}
+.sublink_container i,
+.large_sublink_container i
+{
+  font-size: 51px;
+}
+.sublink_main_content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.large_sublink_main_content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  height: 130px;
+  padding: 6px;
+  margin: 10px;
+}
+.sublink_main_texts{
+  position: absolute;
+  flex-grow: 1;
+  width: 100%;
+  top: 120px;
+  right: 3px;
+  z-index: 100;
+}
+.sublink_main_image{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  right: -80px;
+  top: 50px
+}
+.large_sublink_main_image{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  right: -70px;
+  top: 94px
+}
+.sub_sm{
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  color: #505560;
+}
+.sub_lg{
+  font-size: 28px;
+  color: #505560;
+}
+.sublink_main_image img,
+.large_sublink_main_image img {
+  filter: grayscale(100);
+}
+.sublink_container:hover,
+.large_sublink_container:hover {
+  background-color: #505560;
+}
+.sublink_container:hover .sub_sm,
+.sublink_container:hover .sub_lg,
+.large_sublink_container:hover .sub_sm,
+.large_sublink_container:hover .sub_lg{
+  color: #fff;
+}
+.sublink_container:hover .sublink_main_image img,
+.large_sublink_container:hover .large_sublink_main_image img{
+  filter: grayscale(0);
+}
+.large_sublinks_graph{
+  min-height:98px;
+  z-index: -100 !important;
+}
+
+.lsi i{
+  margin: 20px;
+}
+.recharts-default-tooltip{
+  background-color: #505560 !important;
+  color: #fff !important;
+  border-radius: 5px;
+}
