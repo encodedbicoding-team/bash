@@ -52,6 +52,9 @@ class TopNav extends Component {
               <input type="text" name="searchValue" value={this.state.searchValue} onChange={(e) => this.handleChangeValue(e)} className="searchInput" placeholder="Search"/>
           </div>
         </div>
+        <p className="hit_enter_desc w-100">
+          Hit Enter to search
+        </p>
       </div>
       <div className="top_nav_main_container">
         <div>

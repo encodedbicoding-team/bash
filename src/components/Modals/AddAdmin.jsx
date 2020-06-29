@@ -82,7 +82,7 @@ class AddAdminModal extends Component {
                 value={this.state.role}
                 onChange={(e) => this.handleSetInput(e)}
               >
-                <option selected>Select a role</option>
+                <option selected={true}>Select a role</option>
                 <option value="option">Option</option>
                 <option value="option">Option</option>
               </select>
@@ -104,7 +104,7 @@ class AddAdminModal extends Component {
             <label htmlFor="confirm_password" className="c-1">confirm password</label>
             <input 
               type="password" 
-              name="confirm password" 
+              name="confirm_password" 
               placeholder="******"
               value={this.state.confirm_password} 
               onChange={(e) => this.handleSetInput(e)}/>
