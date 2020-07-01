@@ -9,6 +9,7 @@ import CategoriesPage from '../pages/categories';
 import TransactionsPage from '../pages/transactions';
 import SettingsPage from '../pages/settings';
 import CategoryModal from '../components/Modals/Blocks';
+import ProtectedRoute from '../protected';
 
 export default () => (  
   <Switch>
@@ -21,26 +22,15 @@ export default () => (
     <Route exact path="/auth">
       <LoginPage/>
     </Route>
-    <Route exact path="/dashboard">
-      <DashboardPage/>
-    </Route>
-    <Route exact path="/users">
-      <UserPage/>
-    </Route>
-    <Route exact path="/users/d/:id">
-      <UserDetailsPage/>
-    </Route>
-    <Route exact path="/blocks">
-      <BlocksPage/>
-    </Route>
-    <Route exact path="/categories">
-      <CategoriesPage/>
-    </Route>
-    <Route exact path="/transactions">
-      <TransactionsPage/>
-    </Route>
-    <Route exact path="/settings">
-      <SettingsPage/>
+    <ProtectedRoute exact path="/dashboard" component={DashboardPage}/>
+    <ProtectedRoute exact path="/users" component={UserPage}/>
+    <ProtectedRoute exact path="/users/d/:id" component={UserDetailsPage}/>
+    <ProtectedRoute exact path="/blocks" component={BlocksPage}/>
+    <ProtectedRoute exact path="/categories" component={CategoriesPage}/>
+    <ProtectedRoute exact path="/transactions" component={TransactionsPage}/>
+    <ProtectedRoute exact path="/settings" component={SettingsPage}/>
+    <Route path="*">
+      <CategoryModal/>
     </Route>
   </Switch>
 )

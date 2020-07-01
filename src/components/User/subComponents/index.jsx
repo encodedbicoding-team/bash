@@ -37,7 +37,7 @@ const UserMainDetails = ({user_details_array}) => {
                   user_details_array.map((ud, idx) => 
                   <UserDetailsContent
                     key={idx}
-                    img_url={require('../../../assets/images/random_user.jpg')}
+                    img_url={ud.img_url || require('../../../assets/images/random_user.jpg')}
                     id={ud.id}
                     phone={ud.phone}
                     email={ud.email}

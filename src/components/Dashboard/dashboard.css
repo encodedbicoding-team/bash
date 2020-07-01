@@ -25,12 +25,16 @@
 .dash_rt{
   padding: 18px;
 }
+.sub_user_trans_container {
+  height: 315px;
+  overflow: scroll;
+}
 .users_transactions_container{
   padding: 9px 0 30px 0;
   margin-top: 10px;
   height: 430px;
 }
-.users_transactions_container > .user_trans_contents:nth-child(even) {
+.sub_user_trans_container > .user_trans_contents:nth-child(even) {
   background-color: #fff;
 }
 .view-all-link{

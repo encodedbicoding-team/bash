@@ -129,4 +129,9 @@
    margin: auto;
    width: 35%;
  }
- 
+ .form-error {
+   text-align: left !important;
+   padding: 0 0 0 6px;
+   font-size: .7em;
+   color: red;
+ }

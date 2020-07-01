@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import './utils.css';
 
 const PageNavigation = ({page_details, current_search, date_func}) => {
@@ -24,7 +22,6 @@ const PageNavigation = ({page_details, current_search, date_func}) => {
   if (typeof date_func !== 'function') {
     date_func = () => {};
   }
-  const [showDateItems, setShowDateItems] = useState(false)
 
   return (
     <div className="page_navigation_container">
@@ -48,51 +45,6 @@ const PageNavigation = ({page_details, current_search, date_func}) => {
             </Link>
           ))
         }
-      </div>
-      <div className="page_nav_date_container" onClick={() => setShowDateItems(!showDateItems)}>
-         <div className="nav_date_content">
-           <span>Date</span>
-           <span className="caret">
-             <FontAwesomeIcon icon={faCaretDown}/>
-           </span>
-         </div>
-         {
-           showDateItems ? 
-           <div data-toggle="date_content_items" className="date_content_items">
-           <div>
-              <div 
-                className="date_link_lists date_links"
-                name="date"
-                onClick={() => date_func('date')}
-                >
-                <p>Date</p>
-              </div>
-              <div 
-                className="date_link_lists date_links"
-                name="month"
-                onClick={() => date_func('month')}
-                >
-                <p>Month</p>
-              </div>
-              <div 
-                className="date_link_lists date_links"
-                name="week"
-                onClick={() => date_func('week')}
-                >
-                <p>Week</p>
-              </div>
-              <div 
-                className="date_link_lists date_links"
-                name="day"
-                onClick={() => date_func('day')}
-              >
-                <p>Day</p>
-              </div>
-           </div>
-         </div>
-         :
-         ''
-         }
       </div>
     </div>
   )

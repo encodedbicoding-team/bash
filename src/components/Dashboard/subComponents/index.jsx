@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AreaChart, Tooltip, Area } from 'recharts';
+import { AreaChart, Tooltip, Area} from 'recharts';
 import './subComp.css';
 
 const SubComponents = ({image_name, sub_text, sub_data, url}) => (
@@ -64,7 +64,7 @@ const Graph = ({graph_data, w}) => (
     <div>
       <AreaChart
         width={w}
-        height={99}
+        height={120}
         data={graph_data}
       >
         <defs>
@@ -76,7 +76,7 @@ const Graph = ({graph_data, w}) => (
         <Tooltip />
         <Area
           type="monotone"
-          dataKey="amt"
+          dataKey="amount"
           stroke="#26C0C759"
           fillOpacity={1}
           fill="url(#colorUv)"
@@ -91,7 +91,7 @@ const UserTransDetails = ({img_src, first_name, last_name, amt, trans_date, type
     <div className="user_trans_contents">
         <div className="user_name_image">
           <div className="details_main_image_container">
-              <img width="100%" height="auto" src={require('../../../assets/images/random_user.jpg')} alt="bash users transactions"/>
+              <img width="100%" height="auto" src={img_src} alt="bash users transactions"/>
           </div>
           <div className="details_main_user_container">
               <p className="flex-g-1 capitalize">{first_name}</p>
