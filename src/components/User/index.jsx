@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router';
 import numeral from 'numeral';
+import Swal from 'sweetalert2';
 import { PageNavigation } from '../../utils/pageNavigation';
 import { UserMainDetails } from './subComponents';
 import { DetailsInfo, LineGraph } from '../../utils/utils';
@@ -21,9 +22,13 @@ class UserComponent extends Component {
     }
 
   componentDidMount() {
-    this.handleRouteMatch()
-    this.handleSetCurrentSearch()
-    this.handleSetLineGraphData();
+    try{
+      this.handleRouteMatch()
+      this.handleSetCurrentSearch()
+      this.handleSetLineGraphData();
+    }catch(err) {
+      console.log(err)
+    }
   }
 
   componentDidUpdate(prevProps, nextState) {
@@ -32,14 +37,18 @@ class UserComponent extends Component {
         this.setState({
           retries: this.state.retries - 1,
         })
-        this.props.getUsersByCategory(this.state.allNewUsersFailedData);
+        if (this.props.allNewUsersFailedData) {
+          this.props.getUsersByCategory(this.state.allNewUsersFailedData);
+        } else {
+          this.props.getAllUsers();
+        }
       }
     }
   }
   handleFormatNumber(num, type) {
     num = num.toString();
     if (type !== 'money') {
-      if (num.length < 3) {
+      if (num.length <= 3) {
         num = numeral(parseInt(num, 10))
         return num.value()
       } else {
@@ -83,11 +92,19 @@ class UserComponent extends Component {
         let resultForAllUsers = await this.props.getAllUsers();
         sessionStorage.setItem('<3_EBC__updated__users_dash_data<3_EBC', JSON.stringify(resultForAllUsers.results.data));
         let resultForAllNewUsers = await this.props.getUsersByCategory(search);
-        this.setState({
-          users_data: this.handleFormatUsersDataCategory(resultForAllNewUsers.results.data.users),
-          total_users: resultForAllNewUsers.results.data.total_count,
-          games_played: resultForAllNewUsers.results.data.games_played
-        })
+        if (resultForAllNewUsers) {
+          this.setState({
+            users_data: this.handleFormatUsersDataCategory(resultForAllNewUsers.results.data.users),
+            total_users: resultForAllNewUsers.results.data.total_count,
+            games_played: resultForAllNewUsers.results.data.games_played
+          })
+        } else {
+          Swal.fire({
+            title: 'Invalid Query',
+            html: 'Query is invalid\n must be one of [all, new, active]',
+            icon: 'error'
+          })
+        }
       }
     }catch(err) {
       console.log(err);
@@ -114,13 +131,13 @@ class UserComponent extends Component {
     let users_data = [];
     users_array.forEach((user) => {
       let obj = {};
-      obj['id'] = user.user.id;
-      obj['img_url'] = user.user.photo_url;
-      obj['phone'] = user.user.phone_number;
-      obj['email'] = user.user.email;
-      obj['username'] = user.user.username;
-      obj['status'] = user.user.is_verified ? 'verified' : 'unverified';
-      obj['fullname'] = `${!user.user.first_name ? 'john' : user.user.first_name} ${!user.user.last_name ? 'doe' : user.user.last_name}`;
+      obj['id'] = user.id;
+      obj['img_url'] = user.photo_url;
+      obj['phone'] = user.phone_number;
+      obj['email'] = user.email;
+      obj['username'] = user.username;
+      obj['status'] = user.is_verified ? 'verified' : 'unverified';
+      obj['fullname'] = `${!user.first_name ? 'john' : user.first_name} ${!user.last_name ? 'doe' : user.last_name}`;
 
       users_data.push(obj);
     }) 

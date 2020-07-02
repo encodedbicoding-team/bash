@@ -5,6 +5,7 @@ import Button from '../Buttons';
 import { PageNavigation } from '../../utils/pageNavigation';
 import { DetailsInfo, BlockCateDetails, PieGraph, LineGraph } from '../../utils/utils';
 import { showModal } from '../../features/globals/Modal';
+import { getAllCategoriesData } from '../../features/httpRequests/getRequests';
 import './categories.css';
 
 class CategoriesComponent extends Component {
@@ -17,6 +18,9 @@ class CategoriesComponent extends Component {
     lineGraphLabels: [],
     lineGraphSeries: [],
     showCategoryModal: true,
+    total_categories: 0,
+    all_categories_data: [],
+    retries: 1,
   }
 
   componentDidMount() {
@@ -29,8 +33,101 @@ class CategoriesComponent extends Component {
         }
       }
     });
-    this.handleSetPieGraphData();
-    this.handleSetLineGraphData();
+    this.handleSetCategoriesStateData();
+  }
+
+  componentDidUpdate(prevProps, nextState) {
+    if (this.props.requestAllCategoriesData === true) {
+      if (this.state.retries !== 0) {
+        this.setState({
+          retries: this.state.retries - 1,
+        })
+       this.handleFetchCategoriesData();
+      }
+    }
+  }
+
+  async handleSetCategoriesStateData() {
+    try {
+      const categories_data = JSON.parse(sessionStorage.getItem('<3_EBC__updated__categories_dash_data<3_EBC'));
+      if (categories_data.categories) {
+        this.setState({
+          total_categories: categories_data.categories.length,
+          all_categories_data: this.handleFormatAllCategoriesData(categories_data.categories),
+          lineGraphLabels: this.handleFormatLineGraphData(categories_data.category_stat).lineGraphLabels,
+          lineGraphSeries: this.handleFormatLineGraphData(categories_data.category_stat).lineGraphSeries,
+          pieGraphLabels: this.handleFormatPieGraphData(categories_data.category_stat).pieGraphLabels,
+          pieGraphSeries: this.handleFormatPieGraphData(categories_data.category_stat).pieGraphSeries
+        })
+      }
+      await this.handleFetchCategoriesData();
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+ async handleFetchCategoriesData() {
+    try {
+      const categories_data = await this.props.getAllCategoriesData();
+      sessionStorage.setItem('<3_EBC__updated__categories_dash_data<3_EBC', JSON.stringify(categories_data.data))
+      if (categories_data.data.categories) {
+        this.setState({
+          total_categories: categories_data.data.categories.length,
+          all_categories_data: this.handleFormatAllCategoriesData(categories_data.data.categories),
+          lineGraphLabels: this.handleFormatLineGraphData(categories_data.data.category_stat).lineGraphLabels,
+          lineGraphSeries: this.handleFormatLineGraphData(categories_data.data.category_stat).lineGraphSeries,
+          pieGraphLabels: this.handleFormatPieGraphData(categories_data.data.category_stat).pieGraphLabels,
+          pieGraphSeries: this.handleFormatPieGraphData(categories_data.data.category_stat).pieGraphSeries
+        })
+      }
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  handleFormatAllCategoriesData(cate_array) {
+    let new_data = [];
+    cate_array.forEach((cate) => {
+      let obj = {};
+      obj['title'] = cate.name;
+      obj['keyName'] = 'questions';
+      obj['value'] = cate.questions_count;
+      obj['id'] = cate.id
+
+      new_data.push(obj)
+    })
+    return new_data
+  }
+
+  handleFormatLineGraphData(obj) {
+    const new_array_keys = Object.keys(obj);
+    const lineGraphSeries = [{ data: Object.values(obj)}]
+
+    let lineGraphLabels = [];
+
+    new_array_keys.forEach((k) => {
+      lineGraphLabels.push(k.replace(/(_)/g, ' '))
+    })
+    return {
+      lineGraphLabels,
+      lineGraphSeries
+    }
+
+  }
+
+  handleFormatPieGraphData(obj) {
+    const new_array_keys = Object.keys(obj);
+    const pieGraphSeries = Object.values(obj);
+
+    let pieGraphLabels = [];
+
+    new_array_keys.forEach((k) => {
+      pieGraphLabels.push(k.replace(/(_)/g, ' '))
+    })
+    return {
+      pieGraphLabels,
+      pieGraphSeries
+    }
   }
 
   handleSetCurrentSearch() {
@@ -51,20 +148,7 @@ class CategoriesComponent extends Component {
   handleShowModal() {
     this.setState({showCategoryModal: !this.state.showCategoryModal })
   }
-  handleSetPieGraphData () {
-    const labels = ['Lily', 'Azalea', 'Alyssa', 'Jasmine', 'Cedar', 'Sage']
-    const series = [20, 40, 12, 98, 100, 34]
-
-    this.setState({ pieGraphLabels: labels, pieGraphSeries: series});
-  }
-  handleSetLineGraphData () {
-    const labels = ['Lily', 'Azalea', 'Alyssa', 'Jasmine', 'Cedar', 'Sage']
-    const series = [{
-      data: [20, 40, 12, 98, 100, 34]
-    }]
-
-    this.setState({ lineGraphLabels: labels, lineGraphSeries: series});
-  }
+ 
   handleSetCategoryOption(id) {
     if (this.state.current_category_option_to_show === id) {
       this.setState({ current_category_option_to_show: ''})
@@ -89,10 +173,6 @@ class CategoriesComponent extends Component {
                   text: 'All',
                   url: '/categories'
                 },
-                {
-                  text: 'most played',
-                  url: '/categories'
-                }
               ]}
               current_search={this.state.current_search}
               date_func={(f) => console.log(f)}
@@ -102,16 +182,8 @@ class CategoriesComponent extends Component {
               <div>
                 <DetailsInfo
                   title="total"
-                  figure="7"
-                  width="120px"
-                />
-              </div>
-              <div>
-              <DetailsInfo
-                  title="most played"
-                  figure="technology"
-                  width="120px"
-                  border_right={false}
+                  figure={this.state.total_categories}
+                  width="200px"
                 />
               </div>
           </div>
@@ -134,7 +206,7 @@ class CategoriesComponent extends Component {
           <div className="block_cat_main_container">
               <div className="block_cat_sub_container">
                   {
-                    dummy_categories_data.map((bd, idx) => 
+                    this.state.all_categories_data.map((bd, idx) => 
                     <BlockCateDetails
                       key={idx}
                       title={bd.title}
@@ -154,56 +226,12 @@ class CategoriesComponent extends Component {
   }
 }
 
-const dummy_categories_data = [
-  {
-    title: 'fashion',
-    keyName: 'questions',
-    value: '132'
-  },
-  {
-    title: 'social media drama',
-    keyName: 'questions',
-    value: '300'
-  },
-  {
-    title: 'football',
-    keyName: 'questions',
-    value: '200'
-  },
-  {
-    title: 'music',
-    keyName: 'questions',
-    value: '400'
-  },
-  {
-    title: 'movie',
-    keyName: 'questions',
-    value: '1200'
-  },
-  {
-    title: 'nigerian politics',
-    keyName: 'questions',
-    value: '300'
-  },
-  {
-    title: 'animal',
-    keyName: 'questions',
-    value: '400'
-  },
-  {
-    title: 'international politics',
-    keyName: 'questions',
-    value: '400'
-  },
-  {
-    title: 'maths',
-    keyName: 'questions',
-    value: '400'
-  },
-]
-
 const actions = {
   showModal,
+  getAllCategoriesData
 }
+const mapStateToProps = state => ({
+  requestAllCategoriesData: state.httpGetRequests.requestAllCategoriesData,
+})
 
-export default connect(null, actions)(withRouter(CategoriesComponent));
+export default connect(mapStateToProps, actions)(withRouter(CategoriesComponent));

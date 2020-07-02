@@ -1,14 +1,113 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import { Link } from 'react-router-dom';
-import { Graph } from '../Dashboard/subComponents';
+import numeral from 'numeral';
+import moment from 'moment';
+import { LineGraph } from '../../utils/utils';
 import  { DetailsInfo } from '../../utils/utils';
 import { UserTransDetailsBody } from './subComponent';
+import { getSingleUserData } from '../../features/httpRequests/getRequests';
 import './userdetails.css';
 
 
 class UserDetailsComponent extends Component {
+  state = {
+    user_data: {},
+    user_transactions: [],
+    no_of_games_played: 0,
+    no_of_games_won: 0,
+    user_wallet_data: {},
+    games_played_data: [],
+    games_won_data: [],
+  }
+
+  componentDidMount() {
+    this.handleSetUserId();
+  }
+  handleSetUserId() {
+    let user_id = window.location.pathname.split('/')[4];
+    this.handleFetchSingleUser(user_id);
+  }
+  async handleFetchSingleUser(id) {
+    const result = await this.props.getSingleUserData(id);
+    let result_data = result.data;
+    this.setState({
+      user_data: result_data.user,
+      user_transactions: result_data.transactions,
+      no_of_games_played: result_data.games_played_count,
+      no_of_games_won: result_data.games_won_count,
+      user_wallet_data: result_data.wallet,
+      games_played_data: result_data.games_played,
+      games_won_data: result_data.games_won
+    })
+  }
+  handleFormatNumber(num, type) {
+    if (num !== undefined) {
+      num = num.toString();
+      if (type !== 'money') {
+        if (num.length < 3) {
+          num = numeral(parseInt(num, 10))
+          return num.value()
+        } else {
+          num = numeral(parseInt(num, 10))
+          return num.format('0.0a')
+        }
+      } else {
+        num = numeral(parseInt(num, 10))
+        return num.format('0,0')
+      }
+    } 
+  }
+
+  handleFormatUserTransactions(trans_array) {
+    let formated_trans_data = [];
+    trans_array.forEach((trans) => {
+      let obj = {}
+      obj['amt'] = `₦${this.handleFormatNumber(trans.amount, 'money')}`;
+      obj['date'] = moment(trans.date).format('Do/MMMM/YYYY')
+      obj['type'] = trans.transaction_type === 'FUND' ? 'deposit' : 'withdrawal';
+      obj['id'] = trans.reference;
+
+      formated_trans_data.push(obj)
+    })
+    return formated_trans_data;
+  }
+
+  handleFormatGamesData(data_array, name='') {
+    let lineGraphSeries = [];
+    data_array = data_array.reduce((acc, curr, idx) => {
+      acc[idx] =Number(curr.score);
+      return acc;
+    }, [])
+    lineGraphSeries.push({ data: data_array, name});
+    return lineGraphSeries;
+  }
   render() {
+    const { requestSingleUserData } = this.props;
+    const user = {
+      full_name: requestSingleUserData ? 'Loading...' : `${this.state.user_data.first_name || ''} ${this.state.user_data.last_name || ''}`,
+      username: requestSingleUserData ? 'Loading...' : this.state.user_data.username,
+      email: requestSingleUserData ? 'Loading...' : this.state.user_data.email,
+      id: requestSingleUserData ? 'Loading...' : this.state.user_data.id,
+      status: requestSingleUserData ? 'Loading...' : this.state.user_data.is_verified ? 'verified' : 'unverified',
+      last_visited: requestSingleUserData ? 'Loading...' : moment(this.state.user_data.last_login).format('Do/MMMM/YYYY'),
+      phone: requestSingleUserData ? 'Loading...' : this.state.user_data.phone_number,
+    }
+    const games_played = requestSingleUserData ? 'loading...' : this.handleFormatNumber(this.state.no_of_games_played);
+    const games_won = requestSingleUserData ? 'loading...' : this.handleFormatNumber(this.state.no_of_games_won);
+
+    const user_wallet = {
+      wallet_balance: requestSingleUserData ? 'loading...' : `₦${this.handleFormatNumber(this.state.user_wallet_data.naira_balance, 'money')}`,
+      coin_balance: requestSingleUserData ? 'loading...' : `${this.handleFormatNumber(this.state.user_wallet_data.bash_coin_balance)}BC`,
+      fifty_fifty_balance: requestSingleUserData ? 'loading...' : this.handleFormatNumber(this.state.user_wallet_data.fifty_fifty_balance),
+      add_time_balance: requestSingleUserData ? 'loading...' : this.handleFormatNumber(this.state.user_wallet_data.add_time_balance),
+    }
+
+    const user_transactions = requestSingleUserData ? 'loading...' : this.handleFormatUserTransactions(this.state.user_transactions);
+    let games_played_graph_data = this.handleFormatGamesData(this.state.games_played_data, 'score');
+    let games_won_graph_data = this.handleFormatGamesData(this.state.games_won_data, 'score');
+
     return (
       <div className="user_details_component_containers">
         <div className="user_details_component_header">
@@ -35,38 +134,42 @@ class UserDetailsComponent extends Component {
                   <div className="user_details_profile_head">
                     <div className="u_profile_h">
                       <div className="u_profile_image_c">
-                        <img src={require('../../assets/images/random_user.jpg')} alt="user profile logo" width="100%" height="auto"/>
+                        <img src={this.state.user_data.photo_url || require('../../assets/images/random_user.jpg')} alt="user profile logo" width="100%" height="auto"/>
                       </div>
                       <div>
                         <p 
                           id="u_profile_name"
-                          className="capitalize">john doe</p>
-                        <p className="capitalize font-small" id="u_profile_username">johndoe</p>
+                          className="capitalize">{user.full_name}</p>
+                        <p className="capitalize font-small" id="u_profile_username">{user.username}</p>
                       </div>
                     </div>
                     <div>
                       <div className="u_profile_data">
                         <p>ID</p>
-                        <p>0000000000001</p>
+                        <p>{user.id}</p>
                       </div>
                       <div className="u_profile_data">
                         <p>EMAIL</p>
-                        <p>johndoe@email.com</p>
+                        <p>{user.email}</p>
                       </div>
                       <div className="u_profile_data">
                         <p>PHONE #</p>
-                        <p>234 09050 0440 </p>
+                        <p>{user.phone}</p>
                       </div>
                     </div>
                   </div>
                   <div className="user_details_profile_body">
                     <div className="u_profile_data">
                         <p>STATUS</p>
-                        <p id="status-verified">Verified</p>
+                        <p id={user.status === 'verified' ? "status-verified" : "status-not-verified"}>
+                          {
+                            user.status
+                          }
+                        </p>
                     </div>
                     <div className="u_profile_data">
                         <p>LAST VISITED</p>
-                        <p>20/MAY/2019</p>
+                        <p className="upper">{user.last_visited}</p>
                     </div>
                   </div>
                 </div>
@@ -74,42 +177,42 @@ class UserDetailsComponent extends Component {
               <div className="u_profile_games_details_cont">
                 <div className="u_profile_games_details">
                   <div className="u_profile_graph">
-                    <Graph w={371} graph_data={dummy_graph_data}/>
+                    <LineGraph series={games_played_graph_data}/>
                   </div>
                   <div className="u_profile_gd">
                       <p className="u_profile_games_p">GAMES PLAYED</p>
-                      <p className="u_profile_games_count">1,345</p>
+                      <p className="u_profile_games_count">{games_played}</p>
                   </div>
                   <div className="u_profile_graph">
-                    <Graph w={371} graph_data={dummy_graph_data}/>
+                  <LineGraph series={games_won_graph_data}/>
                   </div>
                   <div className="u_profile_gdw">
                       <p className="u_profile_games_p">GAMES WON</p>
-                      <p className="u_profile_games_count">93</p>
+                      <p className="u_profile_games_count">{games_won}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="">
               <div className="u_profile_graph">
-                <Graph w={703} graph_data={dummy_graph_data}/>
+                  <LineGraph series={games_won_graph_data}/>
               </div>
               <div className="u_profile_balance">
                 <div className="flex flex-row">
                   <div>
                     <DetailsInfo
                       title="wallet balance"
-                      figure="₦259,364"
+                      figure={user_wallet.wallet_balance}
                       color="#26C0C7"
                       font_size="30px"
-                      w="160px"
+                      w="200px"
                     />
                   </div>
                   <div>
                   <div>
                     <DetailsInfo
                       title="coin balance"
-                      figure="72,593BC"
+                      figure={user_wallet.coin_balance}
                       color="#5AA9FA"
                       font_size="30px"
                       w="160px"
@@ -124,7 +227,7 @@ class UserDetailsComponent extends Component {
                     <div>
                       <DetailsInfo
                         title="50/50"
-                        figure="442"
+                        figure={user_wallet.fifty_fifty_balance}
                         font_size="15px"
                         w="70px"
                       />
@@ -132,7 +235,7 @@ class UserDetailsComponent extends Component {
                     <div>
                       <DetailsInfo
                         title="add-time"
-                        figure="72"
+                        figure={user_wallet.add_time_balance}
                         font_size="15px"
                         w="70px"
                         border_right={false}
@@ -144,34 +247,48 @@ class UserDetailsComponent extends Component {
               <div className="u_details_transactions">
                 <div>
                   <p id="u_details_trans_header">Transactions</p>
-                  <div className="u_details_trans_table_head">
+                  {
+                    user_transactions === 'loading...' ? 
                     <div>
-                      <p className="upper">transaction type</p>
+                      <p>Loading...</p>
                     </div>
-                    <div>
-                      <p className="upper">amount</p>
-                    </div>
-                    <div>
-                    <p className="upper">date</p>
-                    </div>
-                    <div className="flex flex-row pr_eye j-space-between d-none">
-                      <i className="lni lni-printer"></i>
-                      <i className="lni lni-eye"></i>
-                    </div>
-                  </div>
-                  <div className="u_details_trans_table_body_cont">
-                    {
-                      dummy_user_trans_details.map((details, idx) => 
-                        <UserTransDetailsBody
-                        key={idx}
-                        amt={details.amt}
-                        date={details.date}
-                        type={details.type}
-                        id={details.id}
-                        />
-                      )
-                    }
-                  </div>
+                      :
+                      user_transactions.length <= 0 ?
+                      <div>
+                        <p>No Transactions yet</p>
+                      </div>
+                      :
+                      <>
+                      <div className="u_details_trans_table_head">
+                        <div>
+                          <p className="upper">transaction type</p>
+                        </div>
+                        <div>
+                          <p className="upper">amount</p>
+                        </div>
+                        <div>
+                          <p className="upper">date</p>
+                        </div>
+                        <div className="flex flex-row pr_eye j-space-between d-none">
+                          <i className="lni lni-printer"></i>
+                          <i className="lni lni-eye"></i>
+                        </div>
+                      </div>
+                      <div className="u_details_trans_table_body_cont">
+                        {
+                         user_transactions.map((details, idx) => 
+                            <UserTransDetailsBody
+                            key={idx}
+                            amt={details.amt}
+                            date={details.date}
+                            type={details.type}
+                            id={details.id}
+                            />
+                          )
+                        }
+                      </div>
+                    </>
+                  }
                 </div>
 
               </div>
@@ -181,149 +298,13 @@ class UserDetailsComponent extends Component {
     )
   }
 }
-const dummy_graph_data =  [{
-  name: "Page A",
-  uv: 4000,
-  pv: 2400,
-  amount: 2400
-},
-{
-  name: "Page B",
-  uv: 3000,
-  pv: 1398,
-  amount: 2210
-},
-{
-  name: "Page C",
-  uv: 2000,
-  pv: 9800,
-  amount: 2290
-},
-{
-  name: "Page D",
-  uv: 2780,
-  pv: 3908,
-  amount: 2000
-},
-{
-  name: "Page E",
-  uv: 1890,
-  pv: 4800,
-  amount: 2181
-},
-{
-  name: "Page F",
-  uv: 2390,
-  pv: 3800,
-  amount: 2500
-},
-{
-  name: "Page G",
-  uv: 3490,
-  pv: 4300,
-  amount: 2100
-},
-{
-  name: "Page A",
-  uv: 4000,
-  pv: 2400,
-  amount: 2400
-},
-{
-  name: "Page B",
-  uv: 3000,
-  pv: 1398,
-  amount: 2210
-},
-]
-
-const dummy_user_trans_details = [
-  {
-    type: 'deposit',
-    amt: '₦5,000',
-    id: 1,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'withdrawal',
-    amt: '₦5,000',
-    id: 2,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'withdrawal',
-    amt: '₦5,000',
-    id: 3,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'deposit',
-    amt: '₦5,000',
-    id: 4,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'deposit',
-    amt: '₦5,000',
-    id: 5,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'withdrawal',
-    amt: '₦5,000',
-    id: 6,
-    date: '24/JAN/2020',
-  },
-  {
-    type: 'deposit',
-    amt: '₦5,000',
-    id: 7,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'deposit',
-    amt: '₦5,000',
-    id: 1,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'withdrawal',
-    amt: '₦5,000',
-    id: 2,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'withdrawal',
-    amt: '₦5,000',
-    id: 3,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'deposit',
-    amt: '₦5,000',
-    id: 4,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'deposit',
-    amt: '₦5,000',
-    id: 5,
-    date: '24/JAN/2020'
-  },
-  {
-    type: 'withdrawal',
-    amt: '₦5,000',
-    id: 6,
-    date: '24/JAN/2020',
-  },
-  {
-    type: 'deposit',
-    amt: '₦5,000',
-    id: 7,
-    date: '24/JAN/2020'
-  }
 
 
-]
+const actions = {
+  getSingleUserData
+}
+const mapStateToProps = state => ({
+  requestSingleUserData: state.httpGetRequests.requestingSingleUserData
+})
 
-export default withRouter(UserDetailsComponent)
+export default connect(mapStateToProps, actions)(withRouter(UserDetailsComponent));

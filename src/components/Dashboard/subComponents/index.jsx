@@ -59,12 +59,12 @@ const LargeSubComponentWithGraph = ({image_name, sub_text, sub_data, graph_data,
   </div>
 )
 
-const Graph = ({graph_data, w}) => (
+const Graph = ({graph_data, w, dataKey}) => (
   <>
     <div>
       <AreaChart
         width={w}
-        height={120}
+        height={130}
         data={graph_data}
       >
         <defs>
@@ -76,7 +76,7 @@ const Graph = ({graph_data, w}) => (
         <Tooltip />
         <Area
           type="monotone"
-          dataKey="amount"
+          dataKey={dataKey || 'amount'}
           stroke="#26C0C759"
           fillOpacity={1}
           fill="url(#colorUv)"

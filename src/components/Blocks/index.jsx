@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Button from '../Buttons';
 import { PageNavigation } from '../../utils/pageNavigation';
 import { showModal } from '../../features/globals/Modal';
+import { getAllBlocksData } from '../../features/httpRequests/getRequests';
 import { DetailsInfo, BlockCateDetails, PieGraph, LineGraph } from '../../utils/utils';
 import './blocks.css'
 
@@ -16,20 +17,92 @@ class BlocksComponent extends Component {
     pieGraphSeries: [],
     lineGraphLabels: [],
     lineGraphSeries: [],
+    total_blocks: 0,
+    most_played: '',
+    all_blocks_data: [],
+    retries: 1,
   }
   componentDidMount() {
-    this.handleSetCurrentSearch();
-    document.onclick = ((e) => {
-      let ele_class = e.target.getAttribute('class');
-      if (ele_class) {
-        if (!ele_class.startsWith('lni')) {
-          this.setState({ current_block_option_to_show: ''})
+    try{
+      this.handleSetCurrentSearch();
+      document.onclick = ((e) => {
+        let ele_class = e.target.getAttribute('class');
+        if (ele_class) {
+          if (!ele_class.startsWith('lni')) {
+            this.setState({ current_block_option_to_show: ''})
+          }
         }
-      }
-    });
-    this.handleSetPieGraphData();
-    this.handleSetLineGraphData();
+      });
+      this.handleSetBlocksStateData();
+    }catch(err) {
+      console.log(err)
+    }
   }
+
+  componentDidUpdate(prevProps, nextState) {
+    if (this.props.requestAllBlocksData === true) {
+      if (this.state.retries !== 0) {
+        this.setState({
+          retries: this.state.retries - 1,
+        })
+       this.handleFetchBlocksData();
+      }
+    }
+  }
+
+  async handleSetBlocksStateData() {
+    try{
+      const blocks_data = JSON.parse(sessionStorage.getItem('<3_EBC__updated__blocks_dash_data<3_EBC'));
+      if (blocks_data.blocks) {
+        this.setState({
+          total_blocks: blocks_data.total_count,
+          most_played: blocks_data.most_played,
+          all_blocks_data: this.handleFormatAllBlocksData(blocks_data.blocks),
+          lineGraphLabels: this.handleFormatLineGraphData(blocks_data.blocks_stat).lineGraphLabels,
+          lineGraphSeries: this.handleFormatLineGraphData(blocks_data.blocks_stat).lineGraphSeries,
+          pieGraphSeries: this.handleFormatPieGraphData(blocks_data.blocks_stat).pieGraphSeries,
+          pieGraphLabels: this.handleFormatPieGraphData(blocks_data.blocks_stat).pieGraphLabels
+        })
+      }
+  
+      await this.handleFetchBlocksData();
+    }catch(err) {
+      console.log(err)
+    }
+  }
+
+  async handleFetchBlocksData() {
+    try{
+      const blocks_data = await this.props.getAllBlocksData();
+      sessionStorage.setItem('<3_EBC__updated__blocks_dash_data<3_EBC', JSON.stringify(blocks_data.data))
+      this.setState({
+        total_blocks: blocks_data.data.total_count,
+        most_played: blocks_data.data.most_played,
+        all_blocks_data: this.handleFormatAllBlocksData(blocks_data.data.blocks),
+        lineGraphLabels: this.handleFormatLineGraphData(blocks_data.data.blocks_stat).lineGraphLabels,
+        lineGraphSeries: this.handleFormatLineGraphData(blocks_data.data.blocks_stat).lineGraphSeries,
+        pieGraphSeries: this.handleFormatPieGraphData(blocks_data.data.blocks_stat).pieGraphSeries,
+        pieGraphLabels: this.handleFormatPieGraphData(blocks_data.data.blocks_stat).pieGraphLabels
+      })
+    }catch(err) {
+      console.log(err);
+    }
+  }
+
+  handleFormatAllBlocksData(blocks_array) {
+    let new_data = [];
+    blocks_array.forEach((block) => {
+      let obj = {};
+      obj['title'] = block.name;
+      obj['keyName'] = 'time';
+      obj['value'] = block.time;
+      obj['id'] = block.id
+
+      new_data.push(obj)
+    })
+    return new_data;
+  }
+
   checkBlockOptionActive(id) {
     if (this.state.current_block_option_to_show === id) {
       return true
@@ -38,21 +111,37 @@ class BlocksComponent extends Component {
     }
   }
 
-  handleSetPieGraphData () {
-    const labels = ['Lily', 'Azalea', 'Alyssa', 'Jasmine', 'Cedar', 'Sage']
-    const series = [20, 40, 12, 98, 100, 34]
+  handleFormatLineGraphData(obj) {
+    const new_array_keys = Object.keys(obj);
+    const lineGraphSeries = [{ data: Object.values(obj)}]
 
-    this.setState({ pieGraphLabels: labels, pieGraphSeries: series});
+    let lineGraphLabels = [];
+
+    new_array_keys.forEach((k) => {
+      lineGraphLabels.push(k.replace(/(_)/g, ' '))
+    })
+    return {
+      lineGraphLabels,
+      lineGraphSeries
+    }
+
   }
 
-  handleSetLineGraphData () {
-    const labels = ['Lily', 'Azalea', 'Alyssa', 'Jasmine', 'Cedar', 'Sage']
-    const series = [{
-      data: [20, 40, 12, 98, 100, 34]
-    }]
+  handleFormatPieGraphData(obj) {
+    const new_array_keys = Object.keys(obj);
+    const pieGraphSeries = Object.values(obj);
 
-    this.setState({ lineGraphLabels: labels, lineGraphSeries: series});
+    let pieGraphLabels = [];
+
+    new_array_keys.forEach((k) => {
+      pieGraphLabels.push(k.replace(/(_)/g, ' '))
+    })
+    return {
+      pieGraphLabels,
+      pieGraphSeries
+    }
   }
+
 
   handleSetBlockOption(id) {
     if (this.state.current_block_option_to_show === id) {
@@ -87,10 +176,6 @@ class BlocksComponent extends Component {
                   text: 'All',
                   url: '/blocks'
                 },
-                {
-                  text: 'most played',
-                  url: '/blocks'
-                }
               ]}
               current_search={this.state.current_search}
               date_func={(f) => console.log(f)}
@@ -100,15 +185,15 @@ class BlocksComponent extends Component {
               <div>
                 <DetailsInfo
                   title="total"
-                  figure="7"
-                  width="120px"
+                  figure={this.state.total_blocks}
+                  w="100px"
                 />
               </div>
               <div>
               <DetailsInfo
                   title="most played"
-                  figure="azalea"
-                  width="120px"
+                  figure={this.state.most_played}
+                  w="300px"
                   border_right={false}
                 />
               </div>
@@ -132,7 +217,7 @@ class BlocksComponent extends Component {
           <div className="block_cat_main_container">
               <div className="block_cat_sub_container">
                   {
-                    dummy_block_data.map((bd, idx) => 
+                    this.state.all_blocks_data.map((bd, idx) => 
                     <BlockCateDetails
                       key={idx}
                       title={bd.title}
@@ -152,51 +237,13 @@ class BlocksComponent extends Component {
   }
 }
 
-const dummy_block_data = [
-  {
-    title: 'lily',
-    keyName: 'time',
-    value: '12:00am'
-  },
-  {
-    title: 'azalea',
-    keyName: 'time',
-    value: '3:00am'
-  },
-  {
-    title: 'alyssa',
-    keyName: 'time',
-    value: '6:00am'
-  },
-  {
-    title: 'jasmine',
-    keyName: 'time',
-    value: '9:00am'
-  },
-  {
-    title: 'cedar',
-    keyName: 'time',
-    value: '12:00pm'
-  },
-  {
-    title: 'basel',
-    keyName: 'time',
-    value: '3:00pm'
-  },
-  {
-    title: 'sage',
-    keyName: 'time',
-    value: '6:00pm'
-  },
-  {
-    title: 'ivy',
-    keyName: 'time',
-    value: '9:00pm'
-  },
-]
-
 const actions = {
   showModal,
+  getAllBlocksData
 }
 
-export default connect(null, actions)(withRouter(BlocksComponent));
+const mapStateToProps = state => ({
+  requestAllBlocksData: state.httpGetRequests.requestAllBlocksData
+})
+
+export default connect(mapStateToProps, actions)(withRouter(BlocksComponent));

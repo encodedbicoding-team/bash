@@ -17,10 +17,14 @@ export const httpGetRequestsSlice = createSlice({
     requestingAllTransData: false,
     allTransDataRequestSuccess: false,
     allTransDataRequestFailed: false,
+    allTransFailedData: null,
     requestingAllNewUsers: false,
     allNewUsersRequestSuccess: false,
     allNewUsersRequestFailed: false,
-    allNewUsersFailedData: null
+    allNewUsersFailedData: null,
+    requestingSingleUserData: false,
+    singleUserRequestSuccess: false,
+    singleUserRequestFailed: false,
   },
   reducers: {
     requestAllUsersData: (state, action) => {
@@ -79,6 +83,22 @@ export const httpGetRequestsSlice = createSlice({
       state.requestingAllNewUsers = false;
       state.allNewUsersRequestFailed = true;
       state.allNewUsersFailedData = actions.payload;
+    },
+    requestSingleUserData: (state, action) => {
+      state.requestingSingleUserData = true;
+    },
+    singleUserDataRequestFailed: (state, action) => {
+      state.singleUserRequestFailed = true;
+      state.requestingSingleUserData = false;
+    },
+    singleUserDataRequestSuccess: (state, action) => {
+      state.singleUserRequestSuccess = true;
+      state.requestingSingleUserData = false;
+    },
+    requestAllTransactionsFailed: (state, action) => {
+      state.requestingAllTransData = false;
+      state.allTransFailedData=action.payload;
+      state.allTransDataRequestFailed = true
     }
   }
 })
@@ -99,6 +119,10 @@ export const {
   requestAllNewUsersData,
   requestAllNewUsersSuccess,
   requestAllNewUsersFailed,
+  requestSingleUserData,
+  singleUserDataRequestFailed,
+  singleUserDataRequestSuccess,
+  requestAllTransactionsFailed,
 } = httpGetRequestsSlice.actions
 
 export const getAllUsers = () => async dispatch => {
@@ -191,25 +215,78 @@ export const getAllTransData = () => async dispatch => {
 
 export const getUsersByCategory = (data) => async dispatch => {
   const access_token = sessionStorage.getItem('__bash__admin__<3_EBC');
-  dispatch(requestAllNewUsersData())
+  const accepted_type = ['new', 'active'];
+  if (!accepted_type.includes(data)) {
+    return;
+  } else {
+    dispatch(requestAllNewUsersData())
+    try {
+      return await $.ajax({
+        type: 'GET',
+        url: `${BASE_URL}/admin/users/?${data === 'new' ? 'new=true' : 'active=true'}/`,
+        headers: {
+          Authorization: `Bearer ${access_token}`
+        },
+        success: (d) => {
+          dispatch(requestAllNewUsersSuccess());
+          return d;
+        }
+      })
+    }catch(err) {
+        dispatch(requestAllNewUsersFailed(data));
+        dispatch(requestAllNewUsersData())
+        return err;
+    }
+  }
+}
+
+export const getSingleUserData = (id) => async dispatch => {
+  dispatch(requestSingleUserData());
+  const access_token = sessionStorage.getItem('__bash__admin__<3_EBC');
   try {
     return await $.ajax({
       type: 'GET',
-      url: `${BASE_URL}/admin/users/?${data === 'new' ? 'new=true' : 'active=true'}`,
+      url: `${BASE_URL}/admin/users/${id}/`,
       headers: {
         Authorization: `Bearer ${access_token}`
       },
-      success: (d) => {
-        dispatch(requestAllNewUsersSuccess());
-        return d;
+      success: (data) => {
+        dispatch(singleUserDataRequestSuccess());
+        return data;
       }
     })
   }catch(err) {
-      dispatch(requestAllNewUsersFailed(data));
-      dispatch(requestAllNewUsersData())
-      return err;
+    dispatch(singleUserDataRequestFailed());
+    dispatch(requestSingleUserData());
+    return err;
   }
+}
 
+export const getTransactionsByCategory = (data) => async dispatch => {
+  const access_token = sessionStorage.getItem('__bash__admin__<3_EBC');
+  const accepted_type = ['purchases', 'withdrawals', 'deposits'];
+  if (!accepted_type.includes(data)) {
+    return;
+  } else {
+    dispatch(requestAllTransData());
+    try {
+      return await $.ajax({
+        type: 'GET',
+        url: `${BASE_URL}/admin/transactions/?type=${data}`,
+        headers: {
+          Authorization: `Bearer ${access_token}`
+        },
+        success: (d) => {
+          dispatch(requestAllTransDataSuccess());
+          return d;
+        }
+      })
+    }catch(err) {
+      dispatch(requestAllTransactionsFailed(data))
+      dispatch(requestAllTransData())
+      return err; 
+    }
+  }
 }
 
 export default httpGetRequestsSlice.reducer;

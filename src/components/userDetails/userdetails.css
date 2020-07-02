@@ -108,9 +108,11 @@
 }
 #status-verified {
   color: #3FC89C;
+  text-transform: capitalize;
 }
 #status-not-verified {
   color: #D4145A;
+  text-transform: capitalize;
 }
 .u_profile_games_details_cont {
   margin-top: 14px;
@@ -122,14 +124,14 @@
   padding: 0 0 5px 0;
 }
 .u_profile_gd {
-  padding: 15px 15px 8px 15px;
+  padding: 10px 15px 8px 15px;
   border-bottom: 1px solid #EBECED;
 }
 .u_profile_gdw {
   padding: 15px 15px 8px 15px;
 }
 .u_profile_graph {
-  padding-top: 14px;
+  padding-top: 5px;
 }
 .u_profile_balance,
 .u_details_transactions {

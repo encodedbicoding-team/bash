@@ -36,7 +36,6 @@ class DashboardComponent extends Component {
   }
 
   componentDidMount() {
-    // handleFetchDashData;
     const updated_users_dash_data = JSON.parse(sessionStorage.getItem('<3_EBC__updated__users_dash_data<3_EBC'));
     if (updated_users_dash_data) {
       this.setState({
@@ -81,7 +80,7 @@ class DashboardComponent extends Component {
   handleFormatNumber(num, type) {
     num = num.toString();
     if (type !== 'money') {
-      if (num.length < 3) {
+      if (num.length <= 3) {
         num = numeral(parseInt(num, 10))
         return num.value()
       } else {
@@ -168,13 +167,6 @@ class DashboardComponent extends Component {
           <div className="flex flex-row dash_details_place">
               <div>
                 <DetailsInfo 
-                  title="visitors"
-                  figure="59,364"
-                  w="120px"
-                />
-              </div>
-              <div>
-                <DetailsInfo 
                   title="games played"
                   figure={this.handleFormatNumber(this.state.total_games_played)}
                   w="140px"
@@ -226,7 +218,7 @@ class DashboardComponent extends Component {
                     </div>
                     <div className="view_all_container">
                       <Link className="link view-all-link"
-                      to='/#'
+                      to='/transactions'
                       >
                         <div className="capitalize dash-view-all">
                           <span>view all</span>
